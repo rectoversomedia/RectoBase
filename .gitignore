@@ -1,0 +1,23 @@
+# Secrets — JANGAN di-commit
+.env
+.env.*
+*.env
+secrets.*
+tripay.conf
+
+# PHP logs
+api/tripay-callbacks.log
+*.log
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Deploy artifacts
+node_modules/

@@ -1,0 +1,54 @@
+{
+  "name": "Base | Bikin pelanggan, Balik lagi.",
+  "short_name": "Base",
+  "description": "Base bantu toko bikin pelanggan balik lagi lewat order, pelanggan, promo, penjualan, dan stock dalam satu genggaman.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#16a34a",
+  "background_color": "#dcfce7",
+  "lang": "id",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "base-logo-tight.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "base-logo-tight.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "base-logo-tight.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Base Home Screen"
+    }
+  ],
+  "categories": ["business", "productivity", "finance"],
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Buka Kasir",
+      "short_name": "Kasir",
+      "description": "Langsung ke halaman kasir",
+      "url": "./#kasir",
+      "icons": [{ "src": "base-logo-tight.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Lihat Dashboard",
+      "short_name": "Dashboard",
+      "description": "Lihat laporan penjualan hari ini",
+      "url": "./#dashboard",
+      "icons": [{ "src": "base-logo-tight.png", "sizes": "96x96" }]
+    }
+  ]
+}
