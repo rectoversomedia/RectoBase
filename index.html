@@ -541,7 +541,7 @@
     @keyframes pulse-live { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
     #screen-home .home-list-card .live-badge { position:static; }
     .today-revenue {
-      margin:4px 0 2px; padding:18px 14px; border-radius:16px;
+      margin:4px 0 13px; padding:18px 14px; border-radius:16px;
       background:#f0fdf4; border:1.5px solid #dcfce7; text-align:center; cursor:pointer;
     }
     .today-revenue-label { font-size:10px; font-weight:700; color:#16a34a; margin-bottom:2px; }
@@ -4818,6 +4818,32 @@
         <div class="today-revenue" onclick="showScreen('penjualan')">
           <div class="today-revenue-value">Rp 1,240,000</div>
           <div class="today-revenue-sub">42 transaksi hari ini - rata-rata Rp 29,500/order</div>
+        </div>
+        <div class="kondisi-grid">
+          <div class="kondisi-item" onclick="openSegment('baru')" style="cursor:pointer">
+            <div class="kondisi-icon-wrap green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+            </div>
+            <div class="kondisi-value">14</div>
+            <div class="kondisi-label">Pelanggan Baru</div>
+            <div class="kondisi-change up"><svg viewBox="0 0 24 24" fill="#16a34a" width="9" height="9"><path d="M7 14l5-5 5 5z"/></svg>27% vs kemarin</div>
+          </div>
+          <div class="kondisi-item" onclick="openSegment('loyal')" style="cursor:pointer">
+            <div class="kondisi-icon-wrap green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.9L1 10"/></svg>
+            </div>
+            <div class="kondisi-value">48</div>
+            <div class="kondisi-label">Pelanggan Balik Lagi</div>
+            <div class="kondisi-change up"><svg viewBox="0 0 24 24" fill="#16a34a" width="9" height="9"><path d="M7 14l5-5 5 5z"/></svg>18% vs kemarin</div>
+          </div>
+          <div class="kondisi-item" onclick="openSegment('hilang')" style="cursor:pointer">
+            <div class="kondisi-icon-wrap orange">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="21" x2="23" y2="15"/><line x1="20" y1="18" x2="26" y2="18"/></svg>
+            </div>
+            <div class="kondisi-value">32</div>
+            <div class="kondisi-label">Tidak Balik Lagi</div>
+            <div class="kondisi-change down"><svg viewBox="0 0 24 24" fill="#ef4444" width="9" height="9"><path d="M7 10l5 5 5-5z"/></svg>12% vs kemarin</div>
+          </div>
         </div>
       </div>
     </div>
