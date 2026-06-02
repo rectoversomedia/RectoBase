@@ -2219,6 +2219,29 @@
     .profil-item-sub   { font-size: 11px; font-weight: 500; color: #94a3b8; margin-top: 1px; }
     .profil-item-chev  { color: #cbd5e1; }
     .profil-item-chev svg { width: 14px; height: 14px; }
+    .profil-lang-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f8fafc;
+      border: 1px solid #e8ecf0;
+      border-radius: 999px;
+      padding: 3px;
+      flex-shrink: 0;
+    }
+    .profil-lang-btn {
+      min-width: 38px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: #64748b;
+      font-family: inherit;
+      font-size: 10.5px;
+      font-weight: 900;
+      padding: 6px 8px;
+      cursor: pointer;
+    }
+    .profil-lang-btn.active { background: #16a34a; color: #fff; }
     .profil-logout-wrap { margin: 8px 16px 24px; }
     .profil-logout-btn {
       background: #fff;
@@ -4675,6 +4698,14 @@
         <div class="profil-item-icon" style="background:#eff6ff"><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
         <div class="profil-item-text"><div class="profil-item-label">Langganan</div><div class="profil-item-sub" id="profil-sub-status">Aktif tahunan hingga 1 Juni 2027</div></div>
         <div class="profil-item-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="profil-item">
+        <div class="profil-item-icon" style="background:#f8fafc"><svg viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20"/><path d="M12 2a15.3 15.3 0 0 0 0 20"/></svg></div>
+        <div class="profil-item-text"><div class="profil-item-label">Bahasa</div><div class="profil-item-sub" id="profil-language-sub">Indonesia</div></div>
+        <div class="profil-lang-actions" onclick="event.stopPropagation()">
+          <button class="profil-lang-btn active" id="lang-id-btn" onclick="setLanguage('id')">ID</button>
+          <button class="profil-lang-btn" id="lang-en-btn" onclick="setLanguage('en')">EN</button>
+        </div>
       </div>
       <div class="profil-item" onclick="openWASupport()">
         <div class="profil-item-icon" style="background:#dcfce7"><svg viewBox="0 0 24 24" fill="#25d366" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.99.524 3.856 1.44 5.47L2 22l4.663-1.425A9.954 9.954 0 0 0 12 22c5.522 0 10-4.477 10-10S17.521 2 12 2z" fill="none" stroke="#25d366" stroke-width=".5"/></svg></div>
@@ -9302,7 +9333,24 @@
   /* ═══════════════════════════════════════════
      AUTH STATE
   ═══════════════════════════════════════════ */
-  function isLoggedIn() { return !!localStorage.getItem('rb_auth'); }
+  function getStoredAuth() {
+    try { return JSON.parse(localStorage.getItem('rb_auth') || '{}'); } catch { return {}; }
+  }
+
+  function isLoggedIn() {
+    const auth = getStoredAuth();
+    return !!auth.id && !auth.demo;
+  }
+
+  function hasAppAccess() {
+    const auth = getStoredAuth();
+    return isLoggedIn() || (!!auth.demo && sessionStorage.getItem('rb_demo_session') === '1');
+  }
+
+  const PUBLIC_SCREENS = new Set(['splash', 'login', 'signup', 'forgot-password', 'terms', 'privacy-policy', 'refund']);
+  function requiresAuth(screenName) {
+    return !PUBLIC_SCREENS.has(screenName);
+  }
 
   async function authRequest(action, payload) {
     const response = await fetch(`api/auth.php?action=${action}`, {
@@ -9397,12 +9445,14 @@
 
   function demoMode() {
     localStorage.setItem('rb_auth', JSON.stringify({ email: 'demo@rectobase.id', name: 'Demo User', outlet: 'Warung Aldo', demo: true }));
+    sessionStorage.setItem('rb_demo_session', '1');
     showNotif('Mode Demo aktif');
     setTimeout(() => showScreen('home'), 400);
   }
 
   function doLogout() {
     localStorage.removeItem('rb_auth');
+    sessionStorage.removeItem('rb_demo_session');
     showNotif('Sampai jumpa');
     setTimeout(() => showScreen('login'), 600);
   }
@@ -10013,7 +10063,7 @@
   let suppressNavStack = false;
 
   function goBack(fallback = 'home') {
-    const target = (fallback === 'profil' && !isLoggedIn()) ? 'login' : fallback;
+    const target = (requiresAuth(fallback) && !hasAppAccess()) ? 'login' : fallback;
     smartBack(target);
   }
 
@@ -10021,10 +10071,14 @@
     const last = appBackStack.pop();
     const target = (last && document.getElementById('screen-' + last)) ? last : fallback;
     suppressNavStack = true;
-    showScreen((target === 'profil' && !isLoggedIn()) ? 'login' : target, { replaceHistory: true });
+    showScreen((requiresAuth(target) && !hasAppAccess()) ? 'login' : target, { replaceHistory: true });
   }
 
   function showScreen(name, options = {}) {
+    if (requiresAuth(name) && !hasAppAccess()) {
+      name = 'login';
+      options = { ...options, replaceHistory: true };
+    }
     if (isTransitioning || name === currentScreen) return;
     if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
 
@@ -10736,7 +10790,26 @@
 
   /* ─── Profile Screen ──────────────────────────────────── */
   function getAuth() {
-    try { return JSON.parse(localStorage.getItem('rb_auth') || '{}'); } catch { return {}; }
+    return getStoredAuth();
+  }
+
+  function getLanguage() {
+    return localStorage.getItem('rb_lang') === 'en' ? 'en' : 'id';
+  }
+
+  function setLanguage(lang) {
+    const next = lang === 'en' ? 'en' : 'id';
+    localStorage.setItem('rb_lang', next);
+    renderLanguageSelector();
+    showNotif(next === 'en' ? 'Language set to English' : 'Bahasa diubah ke Indonesia');
+  }
+
+  function renderLanguageSelector() {
+    const lang = getLanguage();
+    document.getElementById('lang-id-btn')?.classList.toggle('active', lang === 'id');
+    document.getElementById('lang-en-btn')?.classList.toggle('active', lang === 'en');
+    const sub = document.getElementById('profil-language-sub');
+    if (sub) sub.textContent = lang === 'en' ? 'English' : 'Indonesia';
   }
 
   function getPlanInfo(auth) {
@@ -10767,6 +10840,7 @@
     if (planLblEl) planLblEl.textContent = plan.label;
     if (planEl)    planEl.className      = 'profil-plan ' + plan.cls;
     if (subStatEl) subStatEl.textContent = plan.sub;
+    renderLanguageSelector();
 
     // Hide upgrade banner if already subscribed
     if (upgradeEl) upgradeEl.style.display = 'block';
