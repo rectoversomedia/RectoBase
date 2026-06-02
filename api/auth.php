@@ -65,6 +65,7 @@ function publicUser(array $row): array {
         'email' => $row['email'],
         'plan' => $row['plan'] ?: 'trial',
         'whatsapp_limit' => (int) ($row['whatsapp_limit'] ?? 500),
+        'provider' => $row['provider'] ?? 'email',
     ];
 }
 
@@ -115,12 +116,61 @@ try {
                 'password_hash' => password_hash($password, PASSWORD_DEFAULT),
                 'plan' => 'trial',
                 'whatsapp_limit' => 500,
+                'provider' => 'email',
                 'created_at' => gmdate('c'),
             ];
             $store['next_user_id'] = (int) $store['next_user_id'] + 1;
             $store['users'][] = $row;
             return publicUser($row);
         });
+        respond(200, ['success' => true, 'user' => $user]);
+    }
+
+    if ($action === 'google-login') {
+        $idToken = trim((string) ($input['id_token'] ?? ''));
+        if ($idToken === '') {
+            respond(422, ['success' => false, 'message' => 'Google ID token wajib diisi']);
+        }
+
+        $ctx = stream_context_create(['http' => ['timeout' => 6, 'ignore_errors' => true]]);
+        $raw = @file_get_contents('https://oauth2.googleapis.com/tokeninfo?id_token=' . urlencode($idToken), false, $ctx);
+        if (!$raw) {
+            respond(401, ['success' => false, 'message' => 'Gagal verifikasi token Google']);
+        }
+
+        $info = json_decode($raw, true);
+        if (!is_array($info) || !empty($info['error']) || empty($info['email'])) {
+            respond(401, ['success' => false, 'message' => 'Token Google tidak valid']);
+        }
+
+        $email = strtolower((string) $info['email']);
+        $name = trim((string) ($info['name'] ?? '')) ?: explode('@', $email)[0];
+
+        $user = withStore(function (array &$store) use ($email, $name): array {
+            $idx = findUserIndexByEmail($store['users'], $email);
+            if ($idx >= 0) {
+                $store['users'][$idx]['last_login_at'] = gmdate('c');
+                $store['users'][$idx]['provider'] = $store['users'][$idx]['provider'] ?? 'google';
+                return publicUser($store['users'][$idx]);
+            }
+
+            $row = [
+                'id' => (int) $store['next_user_id'],
+                'name' => $name,
+                'outlet' => 'Toko Saya',
+                'phone' => '',
+                'email' => $email,
+                'password_hash' => '',
+                'plan' => 'trial',
+                'whatsapp_limit' => 500,
+                'provider' => 'google',
+                'created_at' => gmdate('c'),
+            ];
+            $store['next_user_id'] = (int) $store['next_user_id'] + 1;
+            $store['users'][] = $row;
+            return publicUser($row);
+        });
+
         respond(200, ['success' => true, 'user' => $user]);
     }
 
