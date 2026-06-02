@@ -2145,43 +2145,64 @@
        PROFILE SCREEN
     ════════════════════════════════════════ */
     .profil-hero {
-      padding: 20px 20px 16px;
-      display: flex;
-      flex-direction: column;
+      margin: 12px 16px 10px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 54px 1fr;
       align-items: center;
-      gap: 10px;
-      background: linear-gradient(160deg, #eff6ff, #f5f3ff);
-      border-radius: 0 0 24px 24px;
-      margin-bottom: 6px;
+      gap: 12px;
+      background: #fff;
+      border: 1.5px solid #e8ecf0;
+      border-radius: 16px;
     }
     .profil-avatar {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      width: 54px; height: 54px;
+      border-radius: 16px;
+      background: #0f172a;
+      color: #fff;
       display: flex; align-items: center; justify-content: center;
-      font-size: 28px;
-      box-shadow: 0 4px 16px rgba(37,99,235,.25);
+      font-size: 22px;
+      font-weight: 900;
     }
-    .profil-name  { font-size: 18px; font-weight: 900; color: #0f172a; }
-    .profil-email { font-size: 12px; font-weight: 500; color: #64748b; }
+    .profil-main { min-width: 0; }
+    .profil-name  { font-size: 16px; font-weight: 900; color: #0f172a; line-height: 1.2; }
+    .profil-email { font-size: 11.5px; font-weight: 500; color: #64748b; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .profil-plan  {
-      display: flex; align-items: center; gap: 6px;
-      padding: 6px 14px; border-radius: 99px;
-      font-size: 11px; font-weight: 800;
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 10px; border-radius: 99px;
+      font-size: 10.5px; font-weight: 800;
+      margin-top: 8px;
     }
     .profil-plan.demo { background: #fef9c3; color: #92400e; }
     .profil-plan.basic { background: #dbeafe; color: #1e40af; }
     .profil-plan.pro   { background: linear-gradient(135deg,#7c3aed,#2563eb); color: #fff; }
+    .profil-promo-card {
+      margin: 0 16px 10px;
+      background: linear-gradient(135deg,#16a34a,#0f9f5f);
+      border-radius: 16px;
+      padding: 15px 16px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(22,163,74,.18);
+    }
+    .profil-promo-eyebrow { font-size: 10px; font-weight: 900; text-transform: uppercase; opacity: .78; }
+    .profil-promo-title { font-size: 15px; font-weight: 900; margin-top: 3px; line-height: 1.2; }
+    .profil-promo-sub { font-size: 11px; opacity: .88; margin-top: 4px; }
+    .profil-promo-cta { background: rgba(255,255,255,.22); border: 1px solid rgba(255,255,255,.28); padding: 8px 12px; border-radius: 99px; font-size: 11.5px; font-weight: 900; white-space: nowrap; }
     .profil-menu {
       background: #fff;
-      border-radius: 18px;
-      margin: 8px 16px 12px;
+      border-radius: 16px;
+      margin: 0 16px 12px;
       overflow: hidden;
       border: 1.5px solid #f1f5f9;
     }
     .profil-item {
       display: flex; align-items: center; gap: 14px;
-      padding: 14px 16px;
+      padding: 13px 16px;
       border-bottom: 1px solid #f1f5f9;
       cursor: pointer;
     }
@@ -4116,7 +4137,7 @@
         <label class="auth-label">Email terdaftar</label>
         <div class="auth-input-wrap">
           <div class="auth-input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <input class="auth-input" type="email" placeholder="email@toko.com">
+          <input class="auth-input" type="email" placeholder="email@toko.com" id="forgot-email">
         </div>
       </div>
       <div style="height:4px"></div>
@@ -4196,31 +4217,20 @@
     <!-- Step 2: Pilih plan -->
     <div id="onb-step-2" style="display:none">
       <div class="onb-panel">
-        <div class="onb-panel-title">Pilih Paket Kamu 🚀</div>
-        <div class="onb-panel-sub">Mulai gratis 14 hari, tidak perlu kartu kredit. Upgrade kapan saja.</div>
+        <div class="onb-panel-title">Paket Base</div>
+        <div class="onb-panel-sub">Satu paket sederhana: harga normal Rp149.000/bulan, promo pengguna baru Rp99.000.</div>
       </div>
       <div style="padding:0 20px">
-        <div style="background:#fff;border:2px solid #bfdbfe;border-radius:16px;padding:14px;margin-bottom:10px;cursor:pointer" id="plan-starter" onclick="selectPlan('starter')">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-            <div style="font-size:14px;font-weight:800;color:#0f172a">Basic</div>
-            <div style="font-size:9px;font-weight:700;color:#64748b;background:#f1f5f9;padding:2px 8px;border-radius:99px">GRATIS 14 HARI</div>
-          </div>
-          <div style="display:flex;align-items:baseline;gap:2px;margin-bottom:8px">
-            <span style="font-size:13px;font-weight:700;color:#0f172a">Rp</span>
-            <span style="font-size:28px;font-weight:900;color:#0f172a">49.900</span>
-            <span style="font-size:11px;font-weight:500;color:#94a3b8">/bulan</span>
-          </div>
-          <div style="font-size:11.5px;color:#475569">✓ Kasir · Order · Pelanggan · Promo WA · Stock</div>
-        </div>
         <div style="background:linear-gradient(145deg,#1e40af,#7c3aed);border-radius:16px;padding:14px;cursor:pointer;position:relative" id="plan-pro" onclick="selectPlan('pro')">
-          <div style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,.2);color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:99px">⭐ REKOMENDASI</div>
-          <div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:6px">Premium</div>
+          <div style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,.2);color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:99px">PROMO</div>
+          <div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:6px">Base Launch Plan</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.75);text-decoration:line-through;margin-bottom:3px">Rp149.000/bulan</div>
           <div style="display:flex;align-items:baseline;gap:2px;margin-bottom:8px">
             <span style="font-size:13px;font-weight:700;color:#fff">Rp</span>
-            <span style="font-size:28px;font-weight:900;color:#fff">99.900</span>
+            <span style="font-size:28px;font-weight:900;color:#fff">99.000</span>
             <span style="font-size:11px;font-weight:500;color:rgba(255,255,255,.7)">/bulan</span>
           </div>
-          <div style="font-size:11.5px;color:rgba(255,255,255,.9)">✓ Semua Basic + AI Insights · Integrasi Moka/Majoo · Multi-outlet · Priority support</div>
+          <div style="font-size:11.5px;color:rgba(255,255,255,.9)">Kasir · Pelanggan · AI Insights · 500 WhatsApp/bulan · Priority support</div>
         </div>
       </div>
     </div>
@@ -4254,72 +4264,39 @@
   </header>
   <div class="screen-body">
     <div class="pricing-hero">
-      <div class="pricing-hero-title">Pilih Paket Terbaik</div>
-      <div class="pricing-hero-sub">Mulai gratis 14 hari · Tidak perlu kartu kredit<br>Batal kapan saja tanpa denda</div>
-    </div>
-    <!-- Toggle bulanan/tahunan -->
-    <div class="pricing-toggle">
-      <div class="pricing-toggle-label" style="color:#0f172a">Bulanan</div>
-      <div class="pricing-toggle-track" id="billing-toggle" onclick="toggleBilling()">
-        <div class="pricing-toggle-dot"></div>
-      </div>
-      <div class="pricing-toggle-label">Tahunan <span class="pricing-save-badge">Hemat 20%</span></div>
+      <div class="pricing-hero-title">Paket Base</div>
+      <div class="pricing-hero-sub">Satu harga untuk semua fitur utama.<br>Promo terbatas untuk pengguna baru.</div>
     </div>
 
     <div class="pricing-cards">
-      <!-- Basic -->
-      <div class="pricing-card starter">
-        <div class="pricing-badge">BASIC</div>
-        <div class="pricing-name">Untuk UMKM yang baru mulai</div>
-        <div class="pricing-amount">
-          <span class="pricing-rp">Rp</span>
-          <span class="pricing-num" id="price-basic">49.900</span>
-        </div>
-        <div class="pricing-period" id="period-basic">per bulan · ditagih bulanan</div>
-        <div class="pricing-divider"></div>
-        <div class="pricing-features">
-          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Kasir & manajemen order</div>
-          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Data pelanggan (max 1.000)</div>
-          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Kirim promo WhatsApp (500/bln)</div>
-          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Manajemen stok & inventaris</div>
-          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Laporan penjualan dasar</div>
-          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>1 outlet · 3 staff</div>
-          <div class="pricing-feat pricing-feat-cross" style="color:#cbd5e1"><div class="pricing-feat-check" style="background:#f8fafc"><svg viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" width="10" height="10"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>AI Insights</div>
-          <div class="pricing-feat pricing-feat-cross" style="color:#cbd5e1"><div class="pricing-feat-check" style="background:#f8fafc"><svg viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" width="10" height="10"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Integrasi Moka / Majoo / Accurate</div>
-        </div>
-        <div class="pricing-cta" onclick="doSubscribe('basic')">Mulai Gratis 14 Hari</div>
-      </div>
-
-      <!-- Premium -->
       <div class="pricing-card pro">
-        <div class="pricing-badge">PREMIUM</div>
-        <div class="pricing-name">Untuk bisnis yang mau scale up</div>
+        <div class="pricing-badge">PROMO 99K</div>
+        <div class="pricing-name">Base untuk UMKM yang mau pelanggan balik lagi</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.78);text-decoration:line-through;margin-bottom:4px">Harga normal Rp149.000/bulan</div>
         <div class="pricing-amount">
           <span class="pricing-rp">Rp</span>
-          <span class="pricing-num" id="price-pro">99.900</span>
+          <span class="pricing-num" id="price-pro">99.000</span>
         </div>
-        <div class="pricing-period" id="period-pro">per bulan · ditagih bulanan</div>
+        <div class="pricing-period" id="period-pro">per bulan · selama masa promo</div>
         <div class="pricing-divider"></div>
         <div class="pricing-features">
-          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Semua fitur Basic</div>
-          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Pelanggan tidak terbatas</div>
-          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Promo WhatsApp tidak terbatas</div>
-          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>✨ AI Insights + Tanya AI</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Kasir, order, stok, dan laporan penjualan</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Database pelanggan dan segmentasi otomatis</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>500 pesan WhatsApp/bulan termasuk paket</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>AI Insights dan rekomendasi promo harian</div>
           <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Otomasi WA (HBD, win-back, VIP)</div>
-          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Integrasi Moka · Majoo · Accurate</div>
-          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>WhatsApp Business API (centang biru)</div>
-          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Multi-outlet · Staff tidak terbatas</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Add-on WhatsApp tersedia kalau butuh lebih dari 500 pesan</div>
           <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg></div>Priority support WhatsApp</div>
         </div>
         <div class="pricing-cta" onclick="doSubscribe('pro')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          Mulai Premium — Gratis 14 Hari
+          Aktifkan Promo Rp99.000
         </div>
       </div>
     </div>
 
     <div class="pricing-guarantee">
-      <b>✓ Garansi uang kembali 7 hari</b> jika tidak puas.<br>
+      <b>✓ Harga normal Rp149.000/bulan.</b><br>
       Pembayaran aman via QRIS dan Virtual Account Tripay.
     </div>
 
@@ -4339,8 +4316,8 @@
         <div class="pricing-faq-a" style="display:none">Data disimpan di server Indonesia yang terenkripsi. Kami tidak menjual data ke pihak ketiga. Detail di Kebijakan Privasi kami.</div>
       </div>
       <div class="pricing-faq-item">
-        <div class="pricing-faq-q">Bisa upgrade/downgrade paket? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="14" height="14"><polyline points="6 9 12 15 18 9"/></svg></div>
-        <div class="pricing-faq-a" style="display:none">Bisa, kapan saja. Upgrade langsung aktif, downgrade berlaku di siklus tagihan berikutnya.</div>
+        <div class="pricing-faq-q">Bagaimana kalau butuh WhatsApp lebih banyak? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="14" height="14"><polyline points="6 9 12 15 18 9"/></svg></div>
+        <div class="pricing-faq-a" style="display:none">Paket sudah termasuk 500 pesan WhatsApp per bulan. Jika butuh lebih banyak, tim kami akan siapkan add-on sesuai volume kebutuhan tokomu.</div>
       </div>
     </div>
   </div>
@@ -4364,8 +4341,8 @@
     <div class="payment-wrap">
       <div class="payment-summary">
         <div class="payment-label">Paket langganan</div>
-        <div class="payment-title" id="payment-plan">Premium Bulanan</div>
-        <div class="payment-amount" id="payment-amount">Rp99.900</div>
+        <div class="payment-title" id="payment-plan">Paket Base · Promo Bulanan</div>
+        <div class="payment-amount" id="payment-amount">Rp99.000</div>
         <div class="payment-meta" id="payment-ref">Invoice sedang dibuat...</div>
       </div>
       <div class="payment-label">Pilih metode</div>
@@ -4460,7 +4437,7 @@
       </div>
       <div class="legal-section">
         <div class="legal-h2">4. Langganan & Pembayaran</div>
-        <ul class="legal-ul"><li>Layanan tersedia dalam paket Basic (Rp49.900/bln) dan Premium (Rp99.900/bln)</li><li>Pembayaran ditagih di muka sesuai siklus yang dipilih</li><li>Harga dapat berubah dengan pemberitahuan 30 hari sebelumnya</li><li>Tidak ada refund untuk periode yang sudah berjalan (kecuali dalam 7 hari pertama)</li></ul>
+        <ul class="legal-ul"><li>Layanan tersedia dalam satu paket Base seharga Rp149.000/bulan</li><li>Promo pengguna baru dapat tersedia dengan harga Rp99.000/bulan selama periode promosi</li><li>Paket termasuk 500 pesan WhatsApp per bulan; penggunaan tambahan dikenakan biaya add-on sesuai kebutuhan</li><li>Pembayaran ditagih di muka sesuai siklus yang dipilih</li><li>Harga dapat berubah dengan pemberitahuan 30 hari sebelumnya</li><li>Tidak ada refund untuk periode yang sudah berjalan (kecuali dalam 7 hari pertama)</li></ul>
       </div>
       <div class="legal-section">
         <div class="legal-h2">5. Penggunaan Wajar</div>
@@ -4666,26 +4643,23 @@
     <div class="header-side" style="width:42px"></div>
   </header>
   <div class="screen-body">
-    <!-- Hero -->
     <div class="profil-hero">
-      <div class="profil-avatar" id="profil-avatar">🧑</div>
-      <div class="profil-name"  id="profil-name">Pemilik Toko</div>
-      <div class="profil-email" id="profil-email">user@email.com</div>
-      <div class="profil-plan demo" id="profil-plan">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="12" height="12"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <span id="profil-plan-label">Mode Demo</span>
+      <div class="profil-avatar" id="profil-avatar">P</div>
+      <div class="profil-main">
+        <div class="profil-name" id="profil-name">Pemilik Toko</div>
+        <div class="profil-email" id="profil-email">user@email.com</div>
+        <div class="profil-plan demo" id="profil-plan"><span id="profil-plan-label">Mode Demo</span></div>
       </div>
     </div>
 
-    <!-- Langganan -->
     <div id="profil-upgrade-section">
-      <div onclick="showScreen('pricing')" style="margin:0 16px 8px;background:linear-gradient(135deg,#16a34a,#22c55e);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 6px 20px rgba(22,163,74,.25)">
-        <div style="flex:1">
-          <div style="font-size:9.5px;font-weight:700;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px">✦ Unlock semua fitur</div>
-          <div style="font-size:14px;font-weight:900;color:#fff">Upgrade ke Pro</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.85);margin-top:2px">Mulai Rp49.900/bulan · 14 hari gratis</div>
+      <div class="profil-promo-card" onclick="showScreen('pricing')">
+        <div>
+          <div class="profil-promo-eyebrow">Promo khusus buat kamu</div>
+          <div class="profil-promo-title">Rp99.000/bulan</div>
+          <div class="profil-promo-sub">Harga normal Rp149.000 · termasuk 500 WhatsApp/bulan</div>
         </div>
-        <div style="background:rgba(255,255,255,.25);border-radius:99px;padding:8px 14px;font-size:12px;font-weight:800;color:#fff;flex-shrink:0">Lihat Paket</div>
+        <div class="profil-promo-cta">Aktifkan</div>
       </div>
     </div>
 
@@ -4693,17 +4667,17 @@
     <div class="profil-menu">
       <div class="profil-item" onclick="showScreen('edit-profil')">
         <div class="profil-item-icon" style="background:#f0fdf4"><svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M18 2l4 4-9 9H9v-4z" fill="none"/></svg></div>
-        <div class="profil-item-text"><div class="profil-item-label">Edit Profil</div><div class="profil-item-sub">Ubah nama, outlet, dan kontak</div></div>
+        <div class="profil-item-text"><div class="profil-item-label">Profil Toko</div><div class="profil-item-sub">Nama, outlet, kontak, dan email</div></div>
         <div class="profil-item-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
       <div class="profil-item" onclick="showScreen('pricing')">
         <div class="profil-item-icon" style="background:#eff6ff"><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-        <div class="profil-item-text"><div class="profil-item-label">Langganan & Paket</div><div class="profil-item-sub" id="profil-sub-status">Lihat paket & kelola langganan</div></div>
+        <div class="profil-item-text"><div class="profil-item-label">Langganan</div><div class="profil-item-sub" id="profil-sub-status">Paket Base Rp149.000/bulan</div></div>
         <div class="profil-item-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
       <div class="profil-item" onclick="openWASupport()">
         <div class="profil-item-icon" style="background:#dcfce7"><svg viewBox="0 0 24 24" fill="#25d366" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.99.524 3.856 1.44 5.47L2 22l4.663-1.425A9.954 9.954 0 0 0 12 22c5.522 0 10-4.477 10-10S17.521 2 12 2z" fill="none" stroke="#25d366" stroke-width=".5"/></svg></div>
-        <div class="profil-item-text"><div class="profil-item-label">Bantuan & Support</div><div class="profil-item-sub">Chat langsung via WhatsApp</div></div>
+        <div class="profil-item-text"><div class="profil-item-label">Bantuan</div><div class="profil-item-sub">Chat customer service RectoBase</div></div>
         <div class="profil-item-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
       <div class="profil-item" onclick="showScreen('privacy-policy')">
@@ -7692,7 +7666,7 @@
           </div>
         </div>
 
-        <!-- Opsi 2: WA Business API (centang biru) -->
+        <!-- Opsi 2: WA Business API resmi -->
         <div class="wa-type-card" id="wa-card-business" onclick="selectWAType('business')">
           <div class="wa-type-header">
             <div class="wa-type-icon" style="background:#dbeafe;position:relative">
@@ -7703,10 +7677,10 @@
             </div>
             <div>
               <div class="wa-type-name">WhatsApp Business API</div>
-              <div class="wa-type-tag biz">✓ Centang Biru · Premium only</div>
+              <div class="wa-type-tag biz">API resmi Meta · Add-on</div>
             </div>
           </div>
-          <div class="wa-type-desc">Nomor bisnis resmi terverifikasi Meta dengan centang biru. Otomasi penuh: auto-reply, template message, broadcast, read receipt.</div>
+          <div class="wa-type-desc">Pakai nomor WhatsApp Business toko yang sudah disetujui Meta. Tidak wajib centang biru. Cocok untuk otomasi penuh, template message, broadcast, dan report pesan.</div>
 
           <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
             <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;color:#475569">
@@ -7723,7 +7697,7 @@
             </div>
             <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;color:#475569">
               <div style="width:18px;height:18px;border-radius:50%;background:#dcfce7;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-              Nomor bisnis centang biru Meta terverifikasi
+              Nomor WhatsApp Business resmi yang tersambung ke Meta
             </div>
           </div>
 
@@ -9329,17 +9303,32 @@
   ═══════════════════════════════════════════ */
   function isLoggedIn() { return !!localStorage.getItem('rb_auth'); }
 
-  function doLogin() {
+  async function authRequest(action, payload) {
+    const response = await fetch(`api/auth.php?action=${action}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json();
+    if (!response.ok || !result.success) throw new Error(result.message || 'Gagal memproses data');
+    return result;
+  }
+
+  async function doLogin() {
     const email = document.getElementById('login-email')?.value.trim();
     const pass  = document.getElementById('login-pass')?.value;
     if (!email || !pass) { showNotif('Isi email dan password terlebih dahulu'); return; }
-    // Simulate auth (replace with real API in production)
-    localStorage.setItem('rb_auth', JSON.stringify({ email, name: 'Pemilik Toko', outlet: 'Toko Saya' }));
-    showNotif('✓ Login berhasil!');
-    setTimeout(() => showScreen('home'), 400);
+    try {
+      const result = await authRequest('login', { email, password: pass });
+      localStorage.setItem('rb_auth', JSON.stringify(result.user));
+      showNotif('Login berhasil');
+      setTimeout(() => showScreen('home'), 400);
+    } catch (err) {
+      showNotif(err.message || 'Login gagal');
+    }
   }
 
-  function doRegister() {
+  async function doRegister() {
     const name   = document.getElementById('reg-name')?.value.trim();
     const outlet = document.getElementById('reg-outlet')?.value.trim();
     const phone  = document.getElementById('reg-phone')?.value.trim();
@@ -9347,12 +9336,16 @@
     const pass   = document.getElementById('reg-pass')?.value;
     const check  = document.getElementById('terms-check')?.classList.contains('checked');
     if (!name || !email || !pass) { showNotif('Isi semua field wajib'); return; }
+    if (pass.length < 8) { showNotif('Password minimal 8 karakter'); return; }
     if (!check) { showNotif('Setujui syarat & ketentuan terlebih dahulu'); return; }
-    // Store pending registration, go to OTP
-    localStorage.setItem('rb_pending', JSON.stringify({ name, outlet, phone, email }));
-    const oTarget = document.getElementById('otp-target');
-    if (oTarget) oTarget.textContent = phone || email;
-    showScreen('otp');
+    try {
+      const result = await authRequest('register', { name, outlet, phone, email, password: pass });
+      localStorage.setItem('rb_auth', JSON.stringify(result.user));
+      showNotif('Akun berhasil dibuat');
+      setTimeout(() => { showScreen('onboarding'); resetOnboarding(); }, 400);
+    } catch (err) {
+      showNotif(err.message || 'Daftar gagal');
+    }
   }
 
   function doGoogleAuth(mode) {
@@ -9380,9 +9373,16 @@
     setTimeout(() => { showScreen('onboarding'); resetOnboarding(); }, 400);
   }
 
-  function doForgotPassword() {
-    showNotif('Link reset password dikirim ke email kamu ✓');
-    setTimeout(() => showScreen('login'), 1500);
+  async function doForgotPassword() {
+    const email = document.getElementById('forgot-email')?.value.trim();
+    if (!email) { showNotif('Isi email terdaftar'); return; }
+    try {
+      await authRequest('forgot', { email });
+      showNotif('Instruksi reset akan dikirim jika email terdaftar');
+      setTimeout(() => showScreen('login'), 1500);
+    } catch (err) {
+      showNotif(err.message || 'Gagal membuat reset password');
+    }
   }
 
   function resendOTP() {
@@ -9396,13 +9396,13 @@
 
   function demoMode() {
     localStorage.setItem('rb_auth', JSON.stringify({ email: 'demo@rectobase.id', name: 'Demo User', outlet: 'Warung Aldo', demo: true }));
-    showNotif('🎯 Mode Demo aktif');
+    showNotif('Mode Demo aktif');
     setTimeout(() => showScreen('home'), 400);
   }
 
   function doLogout() {
     localStorage.removeItem('rb_auth');
-    showNotif('Sampai jumpa! 👋');
+    showNotif('Sampai jumpa');
     setTimeout(() => showScreen('login'), 600);
   }
 
@@ -9458,7 +9458,7 @@
     selectedPlan = plan;
     document.getElementById('plan-starter')?.style.setProperty('border', plan === 'starter' ? '2px solid #2563eb' : '1.5px solid #e2e8f0');
     document.getElementById('plan-pro')?.style.setProperty('opacity', plan === 'pro' ? '1' : '.7');
-    showNotif(plan === 'pro' ? '⭐ Paket Premium dipilih' : '✓ Paket Basic dipilih');
+    showNotif('Paket Base dipilih');
   }
 
   /* ═══════════════════════════════════════════
@@ -9468,24 +9468,7 @@
   let selectedPaymentMethod = 'QRIS';
   let activePayment = null;
   function toggleBilling() {
-    billingAnnual = !billingAnnual;
-    const track = document.getElementById('billing-toggle');
-    if (track) track.classList.toggle('annual', billingAnnual);
-    const pBasic = document.getElementById('price-basic');
-    const pPro   = document.getElementById('price-pro');
-    const pBas   = document.getElementById('period-basic');
-    const pPrp   = document.getElementById('period-pro');
-    if (billingAnnual) {
-      if (pBasic) pBasic.textContent = '39.900';
-      if (pPro)   pPro.textContent   = '79.900';
-      if (pBas)   pBas.textContent   = 'per bulan · ditagih tahunan (hemat 20%)';
-      if (pPrp)   pPrp.textContent   = 'per bulan · ditagih tahunan (hemat 20%)';
-    } else {
-      if (pBasic) pBasic.textContent = '49.900';
-      if (pPro)   pPro.textContent   = '99.900';
-      if (pBas)   pBas.textContent   = 'per bulan · ditagih bulanan';
-      if (pPrp)   pPrp.textContent   = 'per bulan · ditagih bulanan';
-    }
+    billingAnnual = false;
   }
 
   function doSubscribe(plan) {
@@ -9503,9 +9486,7 @@
   }
 
   function getPlanAmount(plan) {
-    const monthly = plan === 'pro' ? 99900 : 49900;
-    const annualMonthly = plan === 'pro' ? 79900 : 39900;
-    return billingAnnual ? annualMonthly * 12 : monthly;
+    return 99000;
   }
 
   function formatRupiah(amount) {
@@ -9519,13 +9500,13 @@
   }
 
   function renderPaymentShell() {
-    if (!activePayment) activePayment = { plan: 'pro', billing: 'monthly', amount: 99900, method: selectedPaymentMethod };
-    const planName = activePayment.plan === 'pro' ? 'Premium' : 'Basic';
-    const billingName = activePayment.billing === 'annual' ? 'Tahunan' : 'Bulanan';
+    if (!activePayment) activePayment = { plan: 'pro', billing: 'monthly', amount: 99000, method: selectedPaymentMethod };
+    const planName = 'Paket Base';
+    const billingName = 'Promo Bulanan';
     const planEl = document.getElementById('payment-plan');
     const amountEl = document.getElementById('payment-amount');
     const refEl = document.getElementById('payment-ref');
-    if (planEl) planEl.textContent = `${planName} ${billingName}`;
+    if (planEl) planEl.textContent = `${planName} · ${billingName}`;
     if (amountEl) amountEl.textContent = formatRupiah(activePayment.amount);
     if (refEl) refEl.textContent = activePayment.merchant_ref ? `Invoice ${activePayment.merchant_ref}` : 'Invoice sedang dibuat...';
     selectPaymentMethod(activePayment.method || 'QRIS', false);
@@ -10758,9 +10739,9 @@
   }
 
   function getPlanInfo(auth) {
-    if (auth.plan === 'pro')   return { label: '⭐ Pro Plan', cls: 'pro',   sub: `Aktif hingga ${formatExpiry(auth.planExpiry)}` };
-    if (auth.plan === 'basic') return { label: '📦 Basic Plan', cls: 'basic', sub: `Aktif hingga ${formatExpiry(auth.planExpiry)}` };
-    return { label: '🎯 Mode Demo', cls: 'demo', sub: 'Upgrade untuk fitur penuh' };
+    if (auth.plan === 'pro' || auth.plan === 'base') return { label: 'Base Aktif', cls: 'pro', sub: `Aktif hingga ${formatExpiry(auth.planExpiry)}` };
+    if (auth.plan === 'trial') return { label: 'Trial Base', cls: 'basic', sub: 'Promo Rp99.000 tersedia' };
+    return { label: 'Mode Demo', cls: 'demo', sub: 'Promo Rp99.000 tersedia' };
   }
 
   function formatExpiry(ts) {
@@ -10789,7 +10770,7 @@
     if (subStatEl) subStatEl.textContent = plan.sub;
 
     // Hide upgrade banner if already subscribed
-    if (upgradeEl) upgradeEl.style.display = (auth.plan === 'pro' || auth.plan === 'basic') ? 'none' : 'block';
+    if (upgradeEl) upgradeEl.style.display = (auth.plan === 'pro' || auth.plan === 'base') ? 'none' : 'block';
   }
 
   function saveEditProfil() {

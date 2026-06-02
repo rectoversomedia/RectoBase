@@ -74,9 +74,7 @@ function tripayRequest(string $method, string $url, string $apiKey, array $paylo
 }
 
 function planAmount(string $plan, string $billing): int {
-    $monthly       = $plan === 'pro' ? 99900  : 49900;
-    $annualMonthly = $plan === 'pro' ? 79900  : 39900;
-    return $billing === 'annual' ? $annualMonthly * 12 : $monthly;
+    return 99000;
 }
 
 function siteOrigin(): string {
@@ -173,8 +171,8 @@ if (!in_array($method, $allowedMethods, true)) {
     respond(422, ['success' => false, 'message' => 'Metode tidak didukung: ' . htmlspecialchars($method)]);
 }
 
-$plan    = in_array(strtolower((string)($input['plan']    ?? '')), ['basic','pro'], true)    ? strtolower((string)$input['plan'])    : 'pro';
-$billing = in_array(strtolower((string)($input['billing'] ?? '')), ['monthly','annual'], true) ? strtolower((string)$input['billing']) : 'monthly';
+$plan    = 'pro';
+$billing = 'monthly';
 $amount  = planAmount($plan, $billing);   // always use server-computed amount (never trust client)
 
 $customerName  = trim((string) ($input['customer_name']  ?? '')) ?: 'Pelanggan RectoBase';
@@ -184,7 +182,7 @@ if (!filter_var($customerEmail, FILTER_VALIDATE_EMAIL)) {
 }
 $customerPhone = preg_replace('/[^0-9+]/', '', (string) ($input['customer_phone'] ?? ''));
 
-$merchantRef = 'RB-' . strtoupper($plan) . '-' . date('YmdHis') . '-' . random_int(1000, 9999);
+$merchantRef = 'RB-BASE-' . date('YmdHis') . '-' . random_int(1000, 9999);
 $origin      = siteOrigin();
 $expiredTime = time() + (24 * 60 * 60); // 24 hours
 
@@ -196,8 +194,8 @@ $body = [
     'customer_email'=> $customerEmail,
     'customer_phone'=> $customerPhone,
     'order_items'   => [[
-        'sku'      => 'RB-' . strtoupper($plan) . '-' . strtoupper($billing),
-        'name'     => 'RectoBase ' . ucfirst($plan) . ' ' . ($billing === 'annual' ? 'Tahunan' : 'Bulanan'),
+        'sku'      => 'RB-BASE-PROMO',
+        'name'     => 'RectoBase Paket Base Promo Bulanan',
         'price'    => $amount,
         'quantity' => 1,
     ]],
