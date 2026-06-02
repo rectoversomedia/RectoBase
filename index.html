@@ -463,20 +463,28 @@
     }
     .akses-item {
       display:flex; flex-direction:column; align-items:center;
-      background:#f8fafc; border:1.5px solid #e8ecf0;
+      border:1.5px solid transparent;
       border-radius:14px; padding:12px 6px 10px; cursor:pointer; gap:5px;
+      min-height:132px; justify-content:center;
+      box-shadow:0 8px 20px rgba(15,23,42,.07);
+      transition:transform .15s ease, box-shadow .15s ease;
     }
+    .akses-item:active { transform:scale(.98); box-shadow:0 4px 12px rgba(15,23,42,.08); }
+    .akses-item.order { background:linear-gradient(180deg,#ecfdf5,#d9f99d); border-color:#bbf7d0; }
+    .akses-item.kasir { background:linear-gradient(180deg,#eff6ff,#dbeafe); border-color:#bfdbfe; }
+    .akses-item.stock { background:linear-gradient(180deg,#fff7ed,#fed7aa); border-color:#fdba74; }
     .akses-item-icon {
-      width:40px; height:40px; border-radius:12px;
+      width:42px; height:42px; border-radius:14px;
       display:flex; align-items:center; justify-content:center;
+      box-shadow:0 6px 12px rgba(15,23,42,.08);
     }
-    .akses-item-icon.blue   { background:#dbeafe; }
-    .akses-item-icon.green  { background:#dcfce7; }
-    .akses-item-icon.orange { background:#ffedd5; }
-    .akses-item-icon svg { width:20px; height:20px; }
-    .akses-item-label { font-size:12px; font-weight:700; color:#0f172a; }
-    .akses-item-sub   { font-size:9px; font-weight:500; color:#94a3b8; text-align:center; line-height:1.4; }
-    .akses-item-arrow { width:14px; height:14px; color:#cbd5e1; }
+    .akses-item-icon.blue   { background:#2563eb; }
+    .akses-item-icon.green  { background:#16a34a; }
+    .akses-item-icon.orange { background:#f97316; }
+    .akses-item-icon svg { width:21px; height:21px; stroke:#fff; }
+    .akses-item-label { font-size:12.5px; font-weight:900; color:#0f172a; line-height:1.15; }
+    .akses-item-sub   { font-size:9.5px; font-weight:600; color:#475569; text-align:center; line-height:1.35; max-width:90px; }
+    .akses-item-arrow { width:15px; height:15px; color:#64748b; margin-top:1px; }
     #screen-home .insight-btn {
       width:100%;
       min-height:42px;
@@ -5022,19 +5030,19 @@
       <div class="akses-sub">Kelola bisnismu dengan mudah</div>
     </div>
     <div class="akses-grid">
-      <div class="akses-item" onclick="showScreen('order')">
+      <div class="akses-item order" onclick="showScreen('order')">
         <div class="akses-item-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></div>
         <div class="akses-item-label">Order</div>
         <div class="akses-item-sub">Terima pesanan dari pelanggan</div>
         <svg class="akses-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
-      <div class="akses-item" onclick="showScreen('kasir')">
+      <div class="akses-item kasir" onclick="showScreen('kasir')">
         <div class="akses-item-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
         <div class="akses-item-label">Kasir</div>
         <div class="akses-item-sub">Catat transaksi lebih cepat</div>
         <svg class="akses-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
-      <div class="akses-item" onclick="showScreen('stock')">
+      <div class="akses-item stock" onclick="showScreen('stock')">
         <div class="akses-item-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
         <div class="akses-item-label">Stock</div>
         <div class="akses-item-sub">Pantau stok &amp; bahan baku</div>
@@ -9182,6 +9190,59 @@
 </div>
 
 <!-- ══════════════════════════════════════════
+     ATUR JADWAL PROMO SCREEN
+══════════════════════════════════════════ -->
+<div class="screen" id="screen-atur-jadwal-promo">
+  <header class="header-inner">
+    <button class="back-btn header-side" onclick="openPromoDetail('terjadwal')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="logo-center"><img class="logo-img" src="base-logo-tight.png?v=1" alt="base"></div>
+    <div class="header-side"></div>
+  </header>
+  <div class="screen-body">
+    <div style="padding:14px 16px 0;text-align:center">
+      <div class="pd-status-pill terjadwal" style="margin:0 auto 8px">⏰ Terjadwal</div>
+      <div class="pd-title" style="margin:0 0 4px">Atur Jadwal Promo</div>
+      <div class="pd-meta" style="margin:0 0 14px">Pastikan waktu kirim, target, dan estimasi penerima sudah benar.</div>
+    </div>
+    <div style="margin:0 16px 12px;background:#fff;border:1.5px solid #e8ecf0;border-radius:16px;padding:14px">
+      <label style="font-size:11px;font-weight:800;color:#64748b;display:block;margin-bottom:6px">Nama promo</label>
+      <input id="sched-title" class="form-input" type="text" value="Happy Hour Spesial" style="font-size:13px;margin-bottom:12px">
+      <label style="font-size:11px;font-weight:800;color:#64748b;display:block;margin-bottom:6px">Tanggal kirim</label>
+      <input id="sched-date" class="form-input" type="date" value="2026-06-02" style="font-size:13px;margin-bottom:12px">
+      <label style="font-size:11px;font-weight:800;color:#64748b;display:block;margin-bottom:6px">Jam kirim</label>
+      <input id="sched-time" class="form-input" type="time" value="14:00" style="font-size:13px;margin-bottom:12px">
+      <label style="font-size:11px;font-weight:800;color:#64748b;display:block;margin-bottom:6px">Target pelanggan</label>
+      <select id="sched-segment" class="form-select" style="font-size:13px" onchange="updateSchedulePreview()">
+        <option data-count="1.248" selected>Semua Pelanggan</option>
+        <option data-count="156">Pelanggan Hilang</option>
+        <option data-count="342">Pelanggan Loyal</option>
+        <option data-count="214">Pelanggan Baru</option>
+        <option data-count="36">Pembeli Tengah Malam</option>
+        <option data-count="27">Ayam Penyet Lovers</option>
+        <option data-count="16">Promo Hunter</option>
+      </select>
+    </div>
+    <div class="pd-schedule-info" style="display:block">
+      <div class="pd-schedule-row"><div class="pd-schedule-label">Estimasi penerima</div><div class="pd-schedule-val" id="sched-preview-count">1.248 pelanggan</div></div>
+      <div class="pd-schedule-row"><div class="pd-schedule-label">Channel</div><div class="pd-schedule-val">WhatsApp</div></div>
+      <div class="pd-schedule-row"><div class="pd-schedule-label">Status</div><div class="pd-schedule-val">Siap dikirim otomatis</div></div>
+    </div>
+    <div class="pd-action-row" style="padding-top:2px">
+      <div class="pd-act-sec" onclick="openPromoDetail('terjadwal')">Kembali</div>
+      <div class="pd-act-main" onclick="savePromoSchedule()">Simpan Jadwal</div>
+      <div class="pd-act-danger" onclick="cancelScheduledPromo()">Batalkan Promo</div>
+    </div>
+  </div>
+  <nav class="bottom-nav">
+    <div class="nav-item" onclick="showScreen('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Beranda</div>
+    <div class="nav-item" onclick="showScreen('pelanggan')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Pelanggan</div>
+    <div class="nav-item active" onclick="showScreen('kirim-promo')" style="color:#16a34a"><svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Promo</div>
+    <div class="nav-item" onclick="showScreen('ai-insights')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Insight</div>
+    <div class="nav-item" onclick="showScreen('tools')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Tools</div>
+  </nav>
+</div>
+
+<!-- ══════════════════════════════════════════
      EDIT LANDING PAGE SCREEN
 ══════════════════════════════════════════ -->
 <div class="screen" id="screen-edit-landing">
@@ -11367,8 +11428,8 @@
     terjadwal: {
       pill:'terjadwal', pillText:'⏰ Terjadwal', title:'Happy Hour Spesial', meta:'Semua Pelanggan · 2 Juni 2026, 14.00',
       terkirim:'0', dibaca:'0', baca_rate:'—', klik:'0', klik_rate:'—', order:'0', order_rate:'—',
-      actions:'<div class="pd-act-main" onclick="showScreen(\'buat-promo\')">Edit Jadwal</div><div class="pd-act-danger" onclick="showNotif(\'Promo dibatalkan.\')">Batalkan</div>',
-      showSchedule: true, schedTime:'2 Juni 2026, 14.00', schedSeg:'Semua Pelanggan', schedCount:'1.248',
+      actions:'<div class="pd-act-main" onclick="openPromoSchedule()">Atur Jadwal</div><div class="pd-act-sec" onclick="showScreen(\'buat-promo\')">Edit Pesan</div><div class="pd-act-danger" onclick="cancelScheduledPromo()">Batalkan</div>',
+      showSchedule: true, schedDate:'2026-06-02', schedHour:'14:00', schedTime:'2 Juni 2026, 14.00', schedSeg:'Semua Pelanggan', schedCount:'1.248',
       showRecipients: false
     },
     selesai: {
@@ -11398,6 +11459,61 @@
     if (recSec) recSec.style.display = d.showRecipients ? '' : 'none';
     lastToolBackScreen = 'kirim-promo';
     showScreen('promo-detail');
+  }
+
+  function openPromoSchedule() {
+    const d = PROMO_DATA.terjadwal;
+    const title = document.getElementById('sched-title');
+    const date = document.getElementById('sched-date');
+    const time = document.getElementById('sched-time');
+    const segment = document.getElementById('sched-segment');
+    if (title) title.value = d.title;
+    if (date) date.value = d.schedDate || '2026-06-02';
+    if (time) time.value = d.schedHour || '14:00';
+    if (segment) {
+      Array.from(segment.options).forEach(opt => { opt.selected = opt.textContent === d.schedSeg; });
+    }
+    updateSchedulePreview();
+    showScreen('atur-jadwal-promo');
+  }
+
+  function updateSchedulePreview() {
+    const segment = document.getElementById('sched-segment');
+    const opt = segment?.selectedOptions?.[0];
+    const count = opt?.dataset?.count || '1.248';
+    const preview = document.getElementById('sched-preview-count');
+    if (preview) preview.textContent = count + ' pelanggan';
+  }
+
+  function formatScheduleDate(dateValue, timeValue) {
+    const [year, month, day] = (dateValue || '2026-06-02').split('-');
+    const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    const monthName = months[Math.max(0, Math.min(11, Number(month) - 1))] || 'Juni';
+    return `${Number(day)} ${monthName} ${year}, ${timeValue || '14:00'}`;
+  }
+
+  function savePromoSchedule() {
+    const title = document.getElementById('sched-title')?.value.trim() || 'Happy Hour Spesial';
+    const date = document.getElementById('sched-date')?.value || '2026-06-02';
+    const time = document.getElementById('sched-time')?.value || '14:00';
+    const segment = document.getElementById('sched-segment');
+    const opt = segment?.selectedOptions?.[0];
+    const seg = opt?.textContent || 'Semua Pelanggan';
+    const count = opt?.dataset?.count || '1.248';
+    PROMO_DATA.terjadwal.title = title;
+    PROMO_DATA.terjadwal.schedDate = date;
+    PROMO_DATA.terjadwal.schedHour = time;
+    PROMO_DATA.terjadwal.schedTime = formatScheduleDate(date, time);
+    PROMO_DATA.terjadwal.schedSeg = seg;
+    PROMO_DATA.terjadwal.schedCount = count;
+    PROMO_DATA.terjadwal.meta = `${seg} · ${PROMO_DATA.terjadwal.schedTime}`;
+    showNotif('✓ Jadwal promo tersimpan');
+    openPromoDetail('terjadwal');
+  }
+
+  function cancelScheduledPromo() {
+    showNotif('Promo terjadwal dibatalkan.');
+    showScreen('kirim-promo');
   }
 
   /* ─── Quick Actions (no screen needed) ──────────────── */
