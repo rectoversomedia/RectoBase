@@ -34,6 +34,7 @@ rsync -avz --progress \
   --exclude='*.sh' \
   --exclude='*.md' \
   --exclude='api/tripay-callbacks.log' \
+  --exclude='api/data/auth-store.json' \
   --exclude='.git/' \
   --exclude='.env*' \
   --exclude='node_modules/' \
