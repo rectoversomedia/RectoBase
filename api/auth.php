@@ -15,36 +15,45 @@ function inputJson(): array {
     return is_array($input) ? $input : [];
 }
 
-function db(): PDO {
+function dataFile(): string {
     $dir = __DIR__ . '/data';
     if (!is_dir($dir)) {
         mkdir($dir, 0775, true);
     }
-    $pdo = new PDO('sqlite:' . $dir . '/rectobase.sqlite');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->exec('PRAGMA foreign_keys = ON');
-    $pdo->exec('CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        outlet TEXT,
-        phone TEXT,
-        email TEXT NOT NULL UNIQUE,
-        password_hash TEXT NOT NULL,
-        plan TEXT NOT NULL DEFAULT "trial",
-        whatsapp_limit INTEGER NOT NULL DEFAULT 500,
-        created_at TEXT NOT NULL
-    )');
-    $pdo->exec('CREATE TABLE IF NOT EXISTS password_resets (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER,
-        email TEXT NOT NULL,
-        code_hash TEXT NOT NULL,
-        expires_at TEXT NOT NULL,
-        used_at TEXT,
-        created_at TEXT NOT NULL,
-        FOREIGN KEY(user_id) REFERENCES users(id)
-    )');
-    return $pdo;
+    return $dir . '/auth-store.json';
+}
+
+function defaultStore(): array {
+    return ['next_user_id' => 1, 'users' => [], 'password_resets' => []];
+}
+
+function withStore(callable $handler) {
+    $file = dataFile();
+    $fh = fopen($file, 'c+');
+    if (!$fh) {
+        throw new RuntimeException('Cannot open auth store');
+    }
+    try {
+        if (!flock($fh, LOCK_EX)) {
+            throw new RuntimeException('Cannot lock auth store');
+        }
+        $raw = stream_get_contents($fh);
+        $store = $raw ? json_decode($raw, true) : defaultStore();
+        if (!is_array($store)) {
+            $store = defaultStore();
+        }
+        $store += defaultStore();
+        $result = $handler($store);
+
+        rewind($fh);
+        ftruncate($fh, 0);
+        fwrite($fh, json_encode($store, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        fflush($fh);
+        flock($fh, LOCK_UN);
+        return $result;
+    } finally {
+        fclose($fh);
+    }
 }
 
 function publicUser(array $row): array {
@@ -59,12 +68,20 @@ function publicUser(array $row): array {
     ];
 }
 
+function findUserIndexByEmail(array $users, string $email): int {
+    foreach ($users as $idx => $user) {
+        if (strtolower((string) ($user['email'] ?? '')) === $email) {
+            return (int) $idx;
+        }
+    }
+    return -1;
+}
+
 $action = strtolower(trim($_GET['action'] ?? 'health'));
 
 try {
-    $pdo = db();
-
     if ($action === 'health') {
+        withStore(fn(array &$store) => true);
         respond(200, ['success' => true, 'message' => 'Auth database ready']);
     }
 
@@ -85,24 +102,43 @@ try {
             respond(422, ['success' => false, 'message' => 'Nama, email valid, dan password minimal 8 karakter wajib diisi']);
         }
 
-        $stmt = $pdo->prepare('INSERT INTO users (name, outlet, phone, email, password_hash, created_at) VALUES (?, ?, ?, ?, ?, ?)');
-        $stmt->execute([$name, $outlet, $phone, $email, password_hash($password, PASSWORD_DEFAULT), gmdate('c')]);
-
-        $row = $pdo->query('SELECT * FROM users WHERE id = ' . (int) $pdo->lastInsertId())->fetch(PDO::FETCH_ASSOC);
-        respond(200, ['success' => true, 'user' => publicUser($row)]);
+        $user = withStore(function (array &$store) use ($name, $outlet, $phone, $email, $password): array {
+            if (findUserIndexByEmail($store['users'], $email) >= 0) {
+                respond(409, ['success' => false, 'message' => 'Email sudah terdaftar']);
+            }
+            $row = [
+                'id' => (int) $store['next_user_id'],
+                'name' => $name,
+                'outlet' => $outlet,
+                'phone' => $phone,
+                'email' => $email,
+                'password_hash' => password_hash($password, PASSWORD_DEFAULT),
+                'plan' => 'trial',
+                'whatsapp_limit' => 500,
+                'created_at' => gmdate('c'),
+            ];
+            $store['next_user_id'] = (int) $store['next_user_id'] + 1;
+            $store['users'][] = $row;
+            return publicUser($row);
+        });
+        respond(200, ['success' => true, 'user' => $user]);
     }
 
     if ($action === 'login') {
         $email = strtolower(trim((string) ($input['email'] ?? '')));
         $password = (string) ($input['password'] ?? '');
-        $stmt = $pdo->prepare('SELECT * FROM users WHERE email = ? LIMIT 1');
-        $stmt->execute([$email]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if (!$row || !password_verify($password, (string) $row['password_hash'])) {
+        $user = withStore(function (array &$store) use ($email, $password): ?array {
+            $idx = findUserIndexByEmail($store['users'], $email);
+            if ($idx < 0) return null;
+            $row = $store['users'][$idx];
+            if (!password_verify($password, (string) ($row['password_hash'] ?? ''))) return null;
+            $store['users'][$idx]['last_login_at'] = gmdate('c');
+            return publicUser($store['users'][$idx]);
+        });
+        if (!$user) {
             respond(401, ['success' => false, 'message' => 'Email atau password salah']);
         }
-        respond(200, ['success' => true, 'user' => publicUser($row)]);
+        respond(200, ['success' => true, 'user' => $user]);
     }
 
     if ($action === 'forgot') {
@@ -110,25 +146,24 @@ try {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             respond(422, ['success' => false, 'message' => 'Email tidak valid']);
         }
-
-        $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
-        $stmt->execute([$email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        $code = (string) random_int(100000, 999999);
-        $expires = gmdate('c', time() + 30 * 60);
-        $reset = $pdo->prepare('INSERT INTO password_resets (user_id, email, code_hash, expires_at, created_at) VALUES (?, ?, ?, ?, ?)');
-        $reset->execute([$user ? (int) $user['id'] : null, $email, password_hash($code, PASSWORD_DEFAULT), $expires, gmdate('c')]);
-
-        // Email provider belum disambungkan. Reset request tetap tercatat di database.
+        withStore(function (array &$store) use ($email): bool {
+            $idx = findUserIndexByEmail($store['users'], $email);
+            $userId = $idx >= 0 ? (int) $store['users'][$idx]['id'] : null;
+            $code = (string) random_int(100000, 999999);
+            $store['password_resets'][] = [
+                'user_id' => $userId,
+                'email' => $email,
+                'code_hash' => password_hash($code, PASSWORD_DEFAULT),
+                'expires_at' => gmdate('c', time() + 30 * 60),
+                'used_at' => null,
+                'created_at' => gmdate('c'),
+            ];
+            return true;
+        });
         respond(200, ['success' => true, 'message' => 'Jika email terdaftar, instruksi reset akan dikirim']);
     }
 
     respond(404, ['success' => false, 'message' => 'Action tidak dikenal']);
-} catch (PDOException $e) {
-    if (($e->errorInfo[1] ?? null) === 19) {
-        respond(409, ['success' => false, 'message' => 'Email sudah terdaftar']);
-    }
-    respond(500, ['success' => false, 'message' => 'Database error']);
 } catch (Throwable $e) {
-    respond(500, ['success' => false, 'message' => 'Server error']);
+    respond(500, ['success' => false, 'message' => 'Auth storage error']);
 }
