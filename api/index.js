@@ -15,9 +15,10 @@
 const HANDLERS = {};
 
 // ── Backend service lazy-loader ─────────────────────────────────────────────────
-// Prebuild copies backend/src → api/_src/ and patches internal require paths.
-// During Vercel build: 'api/_src/...' resolves correctly.
-const BACKEND_BASE = 'api/_src';
+// api/ directory is at project root alongside backend/ — use relative paths.
+// On Vercel: api/ and backend/ both at /var/task/ so ../backend/src/ works.
+// This avoids npm workspace complexity and works with plain `npm install`.
+const BACKEND_BASE = '../backend/src';
 
 let _authSvc, _orderSvc, _customerSvc, _promoSvc, _paymentSvc;
 let _whatsappSvc, _reportSvc, _loyaltySvc, _jwt, _db;
