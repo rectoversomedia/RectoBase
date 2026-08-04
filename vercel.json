@@ -1,9 +1,8 @@
 {
-  "buildCommand": "node scripts/prebuild.js",
-  "installCommand": "npm install --ignore-scripts",
+  "buildCommand": "echo 'no build step'",
+  "installCommand": "npm install",
   "devCommand": "node api/index.js",
   "regions": ["sin1"],
-  "outputDirectory": "frontend",
   "functions": {
     "api/index.js": {
       "memory": 512,
@@ -20,12 +19,6 @@
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
-      ]
-    },
-    {
-      "source": "/api/health",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-store" }
       ]
     }
   ]
