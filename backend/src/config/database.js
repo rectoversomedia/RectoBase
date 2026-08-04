@@ -1,48 +1,42 @@
 const { Pool } = require('pg');
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  min: 2,
-  max: 20,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 5000,
-});
+// Lazy pool — created on first query to avoid connection errors at import time
+let pool = null;
 
-pool.on('error', (err) => {
-  console.error('Unexpected error on idle PostgreSQL client', err);
-});
+function getPool() {
+  if (!pool) {
+    pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      max: process.env.VERCEL ? 5 : 20,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 5000,
+      ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false,
+    });
+    pool.on('error', (err) => {
+      console.error('[DB] Unexpected client error:', err.message);
+    });
+  }
+  return pool;
+}
 
 /**
  * Run a SQL query
- * @param {string} text - SQL query text
- * @param {Array} params - Query parameters
- * @returns {Promise<object>}
  */
 async function query(text, params) {
   const start = Date.now();
-  const result = await pool.query(text, params);
+  const result = await getPool().query(text, params);
   const duration = Date.now() - start;
   if (process.env.NODE_ENV !== 'production') {
-    console.log('Executed query', { text: text.substring(0, 100), duration, rows: result.rowCount });
+    console.log('SQL:', text.substring(0, 100), '|', duration + 'ms');
   }
   return result;
 }
 
 /**
- * Get a client from the pool for transactions
- * @returns {Promise<object>}
- */
-async function getClient() {
-  return pool.connect();
-}
-
-/**
  * Run a function inside a transaction
- * @param {Function} callback - async function receiving the client
- * @returns {Promise<any>}
  */
 async function transaction(callback) {
-  const client = await pool.connect();
+  const client = await getPool().connect();
   try {
     await client.query('BEGIN');
     const result = await callback(client);
@@ -58,11 +52,10 @@ async function transaction(callback) {
 
 /**
  * Check database health
- * @returns {Promise<boolean>}
  */
 async function healthCheck() {
   try {
-    await pool.query('SELECT 1');
+    await getPool().query('SELECT 1');
     return true;
   } catch {
     return false;
@@ -73,14 +66,8 @@ async function healthCheck() {
  * Close all pool connections
  */
 async function close() {
-  await pool.end();
+  if (pool) { await pool.end(); pool = null; }
 }
 
-module.exports = {
-  query,
-  getClient,
-  transaction,
-  healthCheck,
-  close,
-  pool,
-};
+module.exports = { query, transaction, healthCheck, close };
+

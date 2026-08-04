@@ -1,0 +1,32 @@
+{
+  "buildCommand": "node scripts/prebuild.js",
+  "installCommand": "npm install --ignore-scripts",
+  "devCommand": "node api/index.js",
+  "regions": ["sin1"],
+  "outputDirectory": "frontend",
+  "functions": {
+    "api/index.js": {
+      "memory": 512,
+      "maxDuration": 10
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://recto-base.vercel.app" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, PATCH, DELETE, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization, X-Requested-With, X-Admin-Token" },
+        { "key": "Access-Control-Allow-Credentials", "value": "true" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    },
+    {
+      "source": "/api/health",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,25 @@
+/**
+ * Redis config — auto-detects serverless vs. persistent environment.
+ *
+ * Serverless (VERCEL or no REDIS_URL): uses in-memory shim (redis.serverless.js)
+ *   → safe for cold starts, no persistent connections needed
+ *
+ * Persistent (self-hosted / VM): connects to REDIS_URL
+ *   → full Redis with connection pool
+ */
+
+const isServerless = !!(
+  process.env.VERCEL ||
+  !process.env.REDIS_URL ||
+  process.env.USE_IN_MEMORY_REDIS === 'true'
+);
+
+if (isServerless) {
+  module.exports = require('./redis.serverless');
+  return;
+}
+
+// ── Persistent Redis (self-hosted / VM) ────────────────────────────────────────
 const Redis = require('ioredis');
 
 const redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379', {
@@ -17,81 +39,36 @@ redis.on('connect', () => {
   console.log('Redis connected');
 });
 
-/**
- * Set a key with optional TTL (in seconds)
- */
 async function set(key, value, ttlSeconds) {
+  const serialized = JSON.stringify(value);
   if (ttlSeconds) {
-    await redis.set(key, JSON.stringify(value), 'EX', ttlSeconds);
+    await redis.set(key, serialized, 'EX', ttlSeconds);
   } else {
-    await redis.set(key, JSON.stringify(value));
+    await redis.set(key, serialized);
   }
 }
 
-/**
- * Get a key, parsed as JSON
- */
 async function get(key) {
   const val = await redis.get(key);
   if (!val) return null;
-  try {
-    return JSON.parse(val);
-  } catch {
-    return val;
-  }
+  try { return JSON.parse(val); } catch { return val; }
 }
 
-/**
- * Delete a key
- */
-async function del(key) {
-  await redis.del(key);
-}
+async function del(key) { await redis.del(key); }
 
-/**
- * Add to a set
- */
-async function sadd(key, ...members) {
-  await redis.sadd(key, ...members);
-}
+async function sadd(key, ...members) { await redis.sadd(key, ...members); }
 
-/**
- * Get all members of a set
- */
-async function smembers(key) {
-  return redis.smembers(key);
-}
+async function smembers(key) { return redis.smembers(key); }
 
-/**
- * Check if member exists in set
- */
-async function sismember(key, member) {
-  return (await redis.sismember(key, member)) === 1;
-}
+async function sismember(key, member) { return (await redis.sismember(key, member)) === 1; }
 
-/**
- * Increment a counter with TTL
- */
 async function incr(key, ttlSeconds) {
   const val = await redis.incr(key);
-  if (ttlSeconds) {
-    await redis.expire(key, ttlSeconds);
-  }
+  if (ttlSeconds) await redis.expire(key, ttlSeconds);
   return val;
 }
 
-async function close() {
-  await redis.quit();
-}
+async function close() { await redis.quit(); }
 
-module.exports = {
-  redis,
-  set,
-  get,
-  del,
-  sadd,
-  smembers,
-  sismember,
-  incr,
-  close,
-};
+module.exports = { redis, set, get, del, sadd, smembers, sismember, incr, close };
+

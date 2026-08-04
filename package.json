@@ -1,0 +1,15 @@
+{
+  "name": "rectobase",
+  "version": "1.0.0",
+  "description": "RectoBase POS + CRM SaaS — Monorepo (Vercel)",
+  "private": true,
+  "workspaces": ["backend"],
+  "scripts": {
+    "postinstall": "npm install --workspace=backend",
+    "dev": "node api/index.js",
+    "build": "echo 'No build step needed for serverless'"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
