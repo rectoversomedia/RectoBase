@@ -3,334 +3,167 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
   <title>Sistem — RectoBase Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2316a34a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' fill='white' font-size='65' font-weight='800' font-family='sans-serif'%3ER%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-  <div class="admin-layout">
-    <aside class="sidebar" id="sidebar"></aside>
-    <main class="main-content">
-      <header class="page-header">
-        <div>
-          <h1 class="page-title">Pengaturan Sistem</h1>
-          <p class="page-subtitle">Monitoring dan konfigurasi infrastruktur</p>
+<div class="admin-layout">
+
+  <nav class="admin-sidebar" role="navigation" aria-label="Navigasi utama">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo" aria-hidden="true">R</div>
+      <div class="sidebar-brand-text"><div class="sidebar-brand-name">RectoBase</div><div class="sidebar-brand-sub">Admin Panel</div></div>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Menu Utama</div>
+      <ul class="sidebar-nav" role="list">
+        <li class="sidebar-nav-item"><a href="dashboard.html" class="sidebar-nav-link" data-page="dashboard.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>Dashboard</a></li>
+        <li class="sidebar-nav-item"><a href="merchants.html" class="sidebar-nav-link" data-page="merchants.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>Merchant</a></li>
+        <li class="sidebar-nav-item"><a href="transactions.html" class="sidebar-nav-link" data-page="transactions.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></span>Transaksi</a></li>
+        <li class="sidebar-nav-item"><a href="promotions.html" class="sidebar-nav-link" data-page="promotions.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>Promosi</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Sistem</div>
+      <ul class="sidebar-nav" role="list">
+        <li class="sidebar-nav-item"><a href="notifications.html" class="sidebar-nav-link" data-page="notifications.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>Notifikasi</a></li>
+        <li class="sidebar-nav-item"><a href="system.html" class="sidebar-nav-link active" data-page="system.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span>Sistem</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="sidebar-user">
+        <div class="sidebar-avatar" aria-hidden="true">AR</div>
+        <div class="sidebar-user-info"><div class="sidebar-user-name">Ahmad Rizki</div><div class="sidebar-user-role">Super Admin</div></div>
+        <button class="sidebar-logout" id="logout-btn" aria-label="Logout"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg></button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="admin-content" id="system-page" role="main">
+    <header class="admin-topbar" role="banner">
+      <div class="topbar-left">
+        <h1 class="topbar-title">Sistem</h1>
+        <nav aria-label="Breadcrumb"><div class="topbar-breadcrumb"><a href="dashboard.html">Home</a> / Sistem</div></nav>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-btn" aria-label="Notifications"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></button>
+        <div class="topbar-user">
+          <div class="topbar-user-avatar" aria-hidden="true">AR</div>
+          <div class="topbar-user-info"><div class="topbar-user-name">Ahmad Rizki</div><div class="topbar-user-role">Super Admin</div></div>
         </div>
-        <div class="header-actions">
-          <button class="btn btn-sm btn-outline" onclick="runHealthCheck()">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-            Refresh Status
+      </div>
+    </header>
+
+    <div class="admin-main">
+      <div class="page-header">
+        <div class="page-header-left">
+          <h2 class="page-title">Health & Konfigurasi</h2>
+          <p class="page-subtitle">Monitor kesehatan sistem dan kelola konfigurasi platform</p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn btn-secondary btn-sm" id="ping-all-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+            Ping Semua
+          </button>
+          <button class="btn btn-secondary btn-sm" id="clear-cache-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+            Clear Cache
           </button>
         </div>
-      </header>
+      </div>
 
-      <!-- Service Health Grid -->
-      <div class="section">
-        <div class="section-header"><h3 class="section-title">Status Layanan</h3></div>
-        <div class="health-grid" id="healthGrid">
-          <div class="health-card" id="hc-db">
-            <div class="health-card-header">
-              <div class="health-card-icon" id="hc-db-icon">⏳</div>
-              <div>
-                <div class="health-card-name">PostgreSQL Database</div>
-                <div class="health-card-host" id="hc-db-host">Connecting...</div>
+      <!-- Health Status Grid -->
+      <div id="health-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px;" aria-label="Status kesehatan sistem">
+        <div class="skeleton skeleton-block"></div>
+        <div class="skeleton skeleton-block"></div>
+        <div class="skeleton skeleton-block"></div>
+      </div>
+
+      <!-- System Actions -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px;">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Aksi Cepat</div></div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--color-bg);border-radius:var(--radius-lg);">
+              <div style="width:36px;height:36px;background:var(--color-info-bg);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--color-info);flex-shrink:0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div style="flex:1;"><div style="font-weight:600;font-size:0.875rem;">Kirim Test Email</div><div style="font-size:0.8125rem;color:var(--color-text-secondary);">Tes koneksi SMTP/Resend</div></div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <input type="email" id="test-email-input" class="form-input" placeholder="test@example.com" style="width:200px;font-size:0.8125rem;padding:7px 10px;">
+                <button class="btn btn-primary btn-sm" id="send-test-email-btn">Kirim</button>
               </div>
             </div>
-            <div class="health-card-status" id="hc-db-status">Memuat...</div>
-            <div class="health-card-detail" id="hc-db-detail"></div>
+            <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--color-bg);border-radius:var(--radius-lg);">
+              <div style="width:36px;height:36px;background:var(--color-warning-bg);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--color-warning);flex-shrink:0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+              </div>
+              <div style="flex:1;"><div style="font-weight:600;font-size:0.875rem;">Restart API Server</div><div style="font-size:0.8125rem;color:var(--color-text-secondary);">Mulai ulang layanan API</div></div>
+              <button class="btn btn-secondary btn-sm" id="restart-api-btn" style="color:var(--color-warning);border-color:var(--color-warning);">Restart</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--color-bg);border-radius:var(--radius-lg);">
+              <div style="width:36px;height:36px;background:var(--color-warning-bg);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--color-warning);flex-shrink:0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 18"/></svg>
+              </div>
+              <div style="flex:1;"><div style="font-weight:600;font-size:0.875rem;">Restart WhatsApp Gateway</div><div style="font-size:0.8125rem;color:var(--color-text-secondary);">Mulai ulang gateway WhatsApp</div></div>
+              <button class="btn btn-secondary btn-sm" id="restart-wa-btn" style="color:var(--color-warning);border-color:var(--color-warning);">Restart</button>
+            </div>
           </div>
-          <div class="health-card" id="hc-api">
-            <div class="health-card-header">
-              <div class="health-card-icon" id="hc-api-icon">⏳</div>
-              <div>
-                <div class="health-card-name">RectoBase API</div>
-                <div class="health-card-host" id="hc-api-host">Loading...</div>
-              </div>
-            </div>
-            <div class="health-card-status" id="hc-api-status">Memuat...</div>
-            <div class="health-card-detail" id="hc-api-detail"></div>
+        </div>
+
+        <!-- Env Vars -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Environment Variables</div>
+            <span class="badge badge-trial">Production</span>
           </div>
-          <div class="health-card" id="hc-redis">
-            <div class="health-card-header">
-              <div class="health-card-icon" id="hc-redis-icon">⏳</div>
-              <div>
-                <div class="health-card-name">Redis Cache</div>
-                <div class="health-card-host" id="hc-redis-host">Connecting...</div>
-              </div>
-            </div>
-            <div class="health-card-status" id="hc-redis-status">Memuat...</div>
-            <div class="health-card-detail" id="hc-redis-detail"></div>
-          </div>
-          <div class="health-card" id="hc-tripay">
-            <div class="health-card-header">
-              <div class="health-card-icon" id="hc-tripay-icon">⏳</div>
-              <div>
-                <div class="health-card-name">Tripay Gateway</div>
-                <div class="health-card-host" id="hc-tripay-host">api.tripay.co.id</div>
-              </div>
-            </div>
-            <div class="health-card-status" id="hc-tripay-status">Memuat...</div>
-            <div class="health-card-detail" id="hc-tripay-detail"></div>
-          </div>
-          <div class="health-card" id="hc-wa">
-            <div class="health-card-header">
-              <div class="health-card-icon" id="hc-wa-icon">⏳</div>
-              <div>
-                <div class="health-card-name">WhatsApp Gateway</div>
-                <div class="health-card-host" id="hc-wa-host">api.ultramsg.com</div>
-              </div>
-            </div>
-            <div class="health-card-status" id="hc-wa-status">Memuat...</div>
-            <div class="health-card-detail" id="hc-wa-detail"></div>
-          </div>
-          <div class="health-card" id="hc-disk">
-            <div class="health-card-header">
-              <div class="health-card-icon" id="hc-disk-icon">⏳</div>
-              <div>
-                <div class="health-card-name">Disk Space</div>
-                <div class="health-card-host" id="hc-disk-host">Checking...</div>
-              </div>
-            </div>
-            <div class="health-card-status" id="hc-disk-status">Memuat...</div>
-            <div class="health-card-detail" id="hc-disk-detail"></div>
+          <div class="card-body" style="max-height:320px;overflow-y:auto;padding:0 20px;" id="env-vars-list">
+            <div class="skeleton skeleton-text" style="margin:16px 0 8px;"></div>
+            <div class="skeleton skeleton-text" style="width:80%;"></div>
+            <div class="skeleton skeleton-text" style="width:60%;"></div>
           </div>
         </div>
       </div>
 
       <!-- System Logs -->
-      <div class="section">
-        <div class="section-header">
-          <h3 class="section-title">Log Sistem</h3>
-          <div style="display:flex; gap:8px; align-items:center;">
-            <select id="logLevel" class="filter-select" onchange="loadLogs(1)">
-              <option value="">Semua</option>
-              <option value="error">Error</option>
-              <option value="warn">Warning</option>
-              <option value="info">Info</option>
-            </select>
-            <button class="btn btn-sm btn-outline" onclick="loadLogs(1)">Refresh</button>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Log Aktivitas</div>
+            <div class="card-subtitle">Log sistem real-time — refresh otomatis setiap 30 detik</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <span class="badge badge-active" id="logs-live-indicator">
+              <span style="display:inline-block;width:6px;height:6px;background:var(--color-success);border-radius:50%;margin-right:4px;"></span>
+              Live
+            </span>
+            <button class="btn btn-ghost btn-sm" onclick="loadLogsPage(1)" title="Refresh logs">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+            </button>
           </div>
         </div>
-        <div class="table-card">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Waktu</th>
-                <th>Level</th>
-                <th>Pesan</th>
-                <th>Meta</th>
-              </tr>
-            </thead>
-            <tbody id="logTableBody">
-              <tr><td colspan="4" class="table-loading">Memuat log...</td></tr>
-            </tbody>
-          </table>
-          <div class="table-footer">
-            <div class="table-info" id="logInfo"></div>
-            <div class="pagination" id="logPagination"></div>
+        <div class="log-viewer" id="logs-container">
+          <div class="log-viewer-header">
+            <span class="log-viewer-title">Application Logs — production.log</span>
+            <span style="font-size:0.75rem;color:#64748b;" id="logs-page-info">Halaman 1</span>
+          </div>
+          <div class="log-viewer-body" id="log-viewer-body" role="log" aria-live="polite" aria-label="Log sistem">
+            <div style="padding:16px;text-align:center;color:#475569;">Memuat log…</div>
+          </div>
+          <div id="logs-pagination" style="padding:10px 16px;border-top:1px solid #1e293b;display:flex;align-items:center;justify-content:center;gap:8px;">
           </div>
         </div>
       </div>
+    </div>
+  </main>
+</div>
 
-      <!-- Quick Actions -->
-      <div class="section">
-        <div class="section-header"><h3 class="section-title">Aksi Cepat</h3></div>
-        <div class="actions-grid">
-          <button class="action-card" onclick="testEmail()">
-            <div class="action-icon">📧</div>
-            <div class="action-label">Test Email</div>
-            <div class="action-desc">Kirim email test via Resend</div>
-          </button>
-          <button class="action-card" onclick="testTripay()">
-            <div class="action-icon">💳</div>
-            <div class="action-label">Test Tripay</div>
-            <div class="action-desc">Verifikasi credentials Tripay</div>
-          </button>
-          <button class="action-card" onclick="clearCache()">
-            <div class="action-icon">🗑️</div>
-            <div class="action-label">Clear Cache</div>
-            <div class="action-desc">Bersihkan Redis cache</div>
-          </button>
-          <button class="action-card" onclick="triggerBackup()">
-            <div class="action-icon">💾</div>
-            <div class="action-label">Backup Now</div>
-            <div class="action-desc">Jalankan backup manual</div>
-          </button>
-          <button class="action-card" onclick="restartAPI()">
-            <div class="action-icon">🔄</div>
-            <div class="action-label">Restart API</div>
-            <div class="action-desc">Restart PM2 process</div>
-          </button>
-          <button class="action-card" onclick="viewEnvConfig()">
-            <div class="action-icon">⚙️</div>
-            <div class="action-label">Env Config</div>
-            <div class="action-desc">Lihat konfigurasi (masked)</div>
-          </button>
-        </div>
-      </div>
-
-      <!-- API Keys Management -->
-      <div class="section">
-        <div class="section-header"><h3 class="section-title">Konfigurasi API</h3></div>
-        <div class="config-grid" id="configGrid">
-          <div class="config-card">
-            <div class="config-label">Tripay API Key</div>
-            <div class="config-value" id="cfg-tripay-key">••••••••••••••••</div>
-            <button class="btn btn-xs btn-outline" onclick="toggleConfig('tripay-key')">Tampilkan</button>
-          </div>
-          <div class="config-card">
-            <div class="config-label">Tripay Merchant Code</div>
-            <div class="config-value" id="cfg-tripay-merchant">••••••••</div>
-            <button class="btn btn-xs btn-outline" onclick="toggleConfig('tripay-merchant')">Tampilkan</button>
-          </div>
-          <div class="config-card">
-            <div class="config-label">Ultramsg Token</div>
-            <div class="config-value" id="cfg-wa-token">••••••••••••••••</div>
-            <button class="btn btn-xs btn-outline" onclick="toggleConfig('wa-token')">Tampilkan</button>
-          </div>
-          <div class="config-card">
-            <div class="config-label">Ultramsg Instance ID</div>
-            <div class="config-value" id="cfg-wa-instance">••••••••</div>
-            <button class="btn btn-xs btn-outline" onclick="toggleConfig('wa-instance')">Tampilkan</button>
-          </div>
-          <div class="config-card">
-            <div class="config-label">Resend API Key</div>
-            <div class="config-value" id="cfg-resend-key">••••••••••••••••</div>
-            <button class="btn btn-xs btn-outline" onclick="toggleConfig('resend-key')">Tampilkan</button>
-          </div>
-          <div class="config-card">
-            <div class="config-label">Frontend URL</div>
-            <div class="config-value" id="cfg-frontend-url">https://recto-base.vercel.app</div>
-            <button class="btn btn-xs btn-outline" onclick="toggleConfig('frontend-url')">Edit</button>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <div id="toast" class="toast"></div>
-  <script src="assets/js/admin.js"></script>
-  <script>
-    document.getElementById('sidebar').outerHTML = getSidebarHTML('system');
-
-    // ── Auth Guard ──────────────────────────────────────────────────────────────
-    if (!localStorage.getItem('admin_token')) {
-      window.location.href = 'index.html';
-    }
-
-    // ── Health Check ───────────────────────────────────────────────────────────
-    async function runHealthCheck() {
-      const checks = ['db', 'api', 'redis', 'tripay', 'wa', 'disk'];
-      for (const s of checks) {
-        document.getElementById(`hc-${s}-status`).textContent = 'Checking...';
-        document.getElementById(`hc-${s}-icon`).textContent = '⏳';
-      }
-
-      try {
-        const res = await AdminAPI.getHealth();
-        if (res.success && res.data) {
-          const d = res.data;
-          setHealthCard('db', d.db?.ok, `Response: ${d.db?.latency}ms`, d.db?.error || '');
-          setHealthCard('api', true, `Uptime: ${d.api?.uptime || 'N/A'}`, d.api?.version || '');
-          setHealthCard('redis', d.redis?.ok, d.redis?.ok ? 'Connected' : 'Not configured', d.redis?.error || '');
-          setHealthCard('tripay', d.tripay?.configured, d.tripay?.configured ? `${d.tripay.merchant} Mode: ${d.tripay.mode}` : 'Not configured', '');
-          setHealthCard('wa', d.whatsapp?.configured, d.whatsapp?.configured ? `${d.whatsapp.instance} ` : 'Not configured', '');
-          setHealthCard('disk', d.disk?.ok, `${d.disk?.usedPercent?.toFixed(1)}% used`, `${d.disk?.free} free`);
-        }
-      } catch (e) {
-        showToast('Gagal mengambil status sistem: ' + e.message, 'error');
-      }
-    }
-
-    function setHealthCard(id, ok, status, detail) {
-      const icon = document.getElementById(`hc-${id}-icon`);
-      const statusEl = document.getElementById(`hc-${id}-status`);
-      const detailEl = document.getElementById(`hc-${id}-detail`);
-      icon.textContent = ok ? '✅' : '❌';
-      icon.style.fontSize = '24px';
-      statusEl.textContent = status;
-      statusEl.style.color = ok ? 'var(--color-success)' : 'var(--color-danger)';
-      detailEl.textContent = detail;
-    }
-
-    // ── System Logs ────────────────────────────────────────────────────────────
-    let currentLogPage = 1;
-    async function loadLogs(page = 1) {
-      currentLogPage = page;
-      const level = document.getElementById('logLevel')?.value || '';
-      const tbody = document.getElementById('logTableBody');
-      tbody.innerHTML = '<tr><td colspan="4" class="table-loading">Memuat...</td></tr>';
-
-      try {
-        const res = await AdminAPI.getSystemLogs({ page, limit: 50, level });
-        if (res.success && res.data?.logs) {
-          if (res.data.logs.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" class="table-empty">Belum ada log</td></tr>';
-            return;
-          }
-          tbody.innerHTML = res.data.logs.map(log => `
-            <tr>
-              <td class="log-time">${new Date(log.timestamp).toLocaleString('id-ID')}</td>
-              <td><span class="badge badge-${log.level === 'error' ? 'danger' : log.level === 'warn' ? 'warning' : 'info'}">${log.level?.toUpperCase()}</span></td>
-              <td class="log-message">${escapeHtml(log.message)}</td>
-              <td class="log-meta">${log.meta ? escapeHtml(JSON.stringify(log.meta)) : '—'}</td>
-            </tr>
-          `).join('');
-          renderPagination('logPagination', res.data.total, res.data.page, res.data.limit, loadLogs);
-          document.getElementById('logInfo').textContent = `Halaman ${res.data.page} dari ${Math.ceil(res.data.total / res.data.limit)}`;
-        }
-      } catch (e) {
-        tbody.innerHTML = `<tr><td colspan="4" class="table-error">Gagal memuat log: ${escapeHtml(e.message)}</td></tr>`;
-      }
-    }
-
-    // ── Quick Actions ──────────────────────────────────────────────────────────
-    async function testEmail() {
-      try {
-        const res = await AdminAPI.testEmail();
-        showToast(res.success ? 'Email test berhasil dikirim!' : 'Gagal: ' + res.message, res.success ? 'success' : 'error');
-      } catch (e) { showToast('Error: ' + e.message, 'error'); }
-    }
-    async function testTripay() {
-      try {
-        const res = await AdminAPI.testTripay();
-        showToast(res.success ? 'Tripay OK — ' + res.data?.message : 'Tripay belum dikonfigurasi', res.success ? 'success' : 'warning');
-      } catch (e) { showToast('Error: ' + e.message, 'error'); }
-    }
-    async function clearCache() {
-      try {
-        const res = await AdminAPI.clearCache();
-        showToast('Cache cleared', 'success');
-      } catch (e) { showToast('Error: ' + e.message, 'error'); }
-    }
-    async function triggerBackup() {
-      showToast('Backup started... (runs in background)', 'info');
-      try {
-        await AdminAPI.triggerBackup();
-        showToast('Backup triggered successfully', 'success');
-      } catch (e) { showToast('Error: ' + e.message, 'error'); }
-    }
-    async function restartAPI() {
-      if (!confirm('Restart API server? Semua request yang sedang berjalan akan gagal.')) return;
-      try {
-        showToast('Restarting...', 'info');
-        await AdminAPI.restartAPI();
-        setTimeout(runHealthCheck, 5000);
-      } catch (e) { showToast('Error: ' + e.message, 'error'); }
-    }
-    function viewEnvConfig() {
-      showToast('Env config hanya bisa dilihat langsung di server /etc/rectobase/env', 'info');
-    }
-
-    // ── Utility ───────────────────────────────────────────────────────────────
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    }
-
-    // ── Init ──────────────────────────────────────────────────────────────────
-    runHealthCheck();
-    loadLogs(1);
-  </script>
+<script src="assets/js/admin.js"></script>
+<script src="assets/js/system.js"></script>
+<script>
+(function () { initSidebar(); requireAuth(); })();
+</script>
 </body>
 </html>

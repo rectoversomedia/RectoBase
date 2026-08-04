@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Notifikasi — RectoBase Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2316a34a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' fill='white' font-size='65' font-weight='800' font-family='sans-serif'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="admin-layout">
+
+  <nav class="admin-sidebar" role="navigation" aria-label="Navigasi utama">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo" aria-hidden="true">R</div>
+      <div class="sidebar-brand-text"><div class="sidebar-brand-name">RectoBase</div><div class="sidebar-brand-sub">Admin Panel</div></div>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Menu Utama</div>
+      <ul class="sidebar-nav" role="list">
+        <li class="sidebar-nav-item"><a href="dashboard.html" class="sidebar-nav-link" data-page="dashboard.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>Dashboard</a></li>
+        <li class="sidebar-nav-item"><a href="merchants.html" class="sidebar-nav-link" data-page="merchants.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>Merchant</a></li>
+        <li class="sidebar-nav-item"><a href="transactions.html" class="sidebar-nav-link" data-page="transactions.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></span>Transaksi</a></li>
+        <li class="sidebar-nav-item"><a href="promotions.html" class="sidebar-nav-link" data-page="promotions.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>Promosi</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Sistem</div>
+      <ul class="sidebar-nav" role="list">
+        <li class="sidebar-nav-item"><a href="notifications.html" class="sidebar-nav-link active" data-page="notifications.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>Notifikasi</a></li>
+        <li class="sidebar-nav-item"><a href="system.html" class="sidebar-nav-link" data-page="system.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span>Sistem</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="sidebar-user">
+        <div class="sidebar-avatar" aria-hidden="true">AR</div>
+        <div class="sidebar-user-info"><div class="sidebar-user-name">Ahmad Rizki</div><div class="sidebar-user-role">Super Admin</div></div>
+        <button class="sidebar-logout" id="logout-btn" aria-label="Logout"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg></button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="admin-content" id="notifications-page" role="main">
+    <header class="admin-topbar" role="banner">
+      <div class="topbar-left">
+        <h1 class="topbar-title">Notifikasi</h1>
+        <nav aria-label="Breadcrumb"><div class="topbar-breadcrumb"><a href="dashboard.html">Home</a> / Notifikasi</div></nav>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-btn" aria-label="Notifications"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></button>
+        <div class="topbar-user">
+          <div class="topbar-user-avatar" aria-hidden="true">AR</div>
+          <div class="topbar-user-info"><div class="topbar-user-name">Ahmad Rizki</div><div class="topbar-user-role">Super Admin</div></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="admin-main">
+      <div class="page-header">
+        <div class="page-header-left">
+          <h2 class="page-title">Kirim Notifikasi</h2>
+          <p class="page-subtitle">Kirim pengumuman dan notifikasi ke merchant di platform RectoBase</p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;">
+        <!-- Compose Form -->
+        <div class="compose-form">
+          <div class="compose-header">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:32px;height:32px;background:var(--color-primary-light);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--color-primary);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:700;font-size:0.9375rem;">Compose Notifikasi</div>
+                <div style="font-size:0.75rem;color:var(--color-text-muted);">Push notification & email</div>
+              </div>
+            </div>
+            <button class="btn btn-ghost btn-sm" onclick="resetCompose()">Reset</button>
+          </div>
+
+          <div class="compose-body">
+            <!-- Error message area -->
+            <div id="compose-error" style="display:none;background:var(--color-danger-bg);color:var(--color-danger);padding:10px 14px;border-radius:var(--radius);font-size:0.875rem;margin-bottom:16px;border:1px solid rgba(220,38,38,0.2);"></div>
+
+            <div class="form-group">
+              <label for="notif-title" class="form-label required">Judul Notifikasi</label>
+              <input type="text" id="notif-title" class="form-input" placeholder="Contoh: Maintenance Jadwal 1 Jan 2026" maxlength="100">
+              <div class="form-hint">Maksimal 100 karakter</div>
+            </div>
+
+            <div class="form-group">
+              <label for="notif-body" class="form-label required">Isi Pesan</label>
+              <textarea id="notif-body" class="form-textarea" placeholder="Tulis pesan notifikasi di sini…" rows="5" maxlength="500"></textarea>
+              <div class="form-hint">Maksimal 500 karakter. Supports plain text.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="notif-type" class="form-label">Tipe Notifikasi</label>
+              <select id="notif-type" class="form-select">
+                <option value="info">Informasi</option>
+                <option value="warning">Peringatan</option>
+                <option value="promo">Promosi</option>
+                <option value="maintenance">Maintenance</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="notif-target" class="form-label required">Target Penerima</label>
+              <select id="notif-target" class="form-select">
+                <option value="all">Semua Merchant</option>
+                <option value="plan:starter">Hanya Plan Starter</option>
+                <option value="plan:professional">Hanya Plan Professional</option>
+                <option value="plan:enterprise">Hanya Plan Enterprise</option>
+                <option value="status:trial">Merchant Trial</option>
+                <option value="status:active">Merchant Aktif</option>
+                <option value="status:expired">Merchant Expired</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="notif-channel" class="form-label">Channel</label>
+              <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                <label class="form-check">
+                  <input type="checkbox" id="channel-push" checked>
+                  <span>Push Notification</span>
+                </label>
+                <label class="form-check">
+                  <input type="checkbox" id="channel-email" checked>
+                  <span>Email</span>
+                </label>
+                <label class="form-check">
+                  <input type="checkbox" id="channel-sms">
+                  <span>SMS</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Preview -->
+            <div style="margin-top:20px;">
+              <div style="font-weight:600;font-size:0.875rem;margin-bottom:10px;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em;">Preview</div>
+              <div style="background:var(--color-bg);border-radius:var(--radius-lg);padding:16px;display:flex;gap:12px;align-items:flex-start;">
+                <div style="width:36px;height:36px;background:var(--color-primary);border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;color:white;flex-shrink:0;font-weight:700;font-size:0.875rem;">R</div>
+                <div>
+                  <div style="font-weight:700;font-size:0.875rem;" id="preview-title">Judul Notifikasi</div>
+                  <div style="font-size:0.8125rem;color:var(--color-text-secondary);margin-top:2px;" id="preview-body">Isi pesan notifikasi akan muncul di sini…</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="compose-footer">
+            <div style="font-size:0.8125rem;color:var(--color-text-muted);" id="recipient-count">
+              <span style="font-weight:600;color:var(--color-text);" id="recipient-number">1.847</span> merchant akan menerima notifikasi ini
+            </div>
+            <button class="btn btn-primary" id="send-notif-btn" onclick="sendNotification()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              Kirim Notifikasi
+            </button>
+          </div>
+        </div>
+
+        <!-- Notification History -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Riwayat Notifikasi</div>
+                <div class="card-subtitle">Notifikasi yang sudah dikirim</div>
+              </div>
+            </div>
+            <div class="card-body" style="padding:0;max-height:600px;overflow-y:auto;" id="notif-history">
+              <div style="display:flex;align-items:center;justify-content:center;min-height:200px;">
+                <div class="spinner" aria-label="Memuat…"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Stats -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">
+            <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:16px;text-align:center;">
+              <div style="font-size:1.5rem;font-weight:800;color:var(--color-primary);" id="total-sent">12.847</div>
+              <div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:4px;">Total Terkirim</div>
+            </div>
+            <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:16px;text-align:center;">
+              <div style="font-size:1.5rem;font-weight:800;color:var(--color-info);" id="avg-open">68.4%</div>
+              <div style="font-size:0.75rem;color:var(--color-text-muted);margin-top:4px;">Rata-rata Open</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="assets/js/admin.js"></script>
+<script>
+(function () {
+  if (!API.isAuthenticated()) { window.location.href = 'index.html'; return; }
+  initSidebar();
+
+  // Preview live update
+  document.getElementById('notif-title').addEventListener('input', function () {
+    var el = document.getElementById('preview-title');
+    if (el) el.textContent = this.value || 'Judul Notifikasi';
+  });
+  document.getElementById('notif-body').addEventListener('input', function () {
+    var el = document.getElementById('preview-body');
+    if (el) el.textContent = this.value || 'Isi pesan notifikasi akan muncul di sini…';
+  });
+
+  // Update recipient count on target change
+  document.getElementById('notif-target').addEventListener('change', function () {
+    var recipientEl = document.getElementById('recipient-number');
+    if (!recipientEl) return;
+    var counts = {
+      'all': 1847,
+      'plan:starter': 687,
+      'plan:professional': 845,
+      'plan:enterprise': 45,
+      'status:trial': 124,
+      'status:active': 1523,
+      'status:expired': 200
+    };
+    recipientEl.textContent = counts[this.value] || 0;
+  });
+
+  window.resetCompose = function () {
+    document.getElementById('notif-title').value = '';
+    document.getElementById('notif-body').value = '';
+    document.getElementById('notif-type').value = 'info';
+    document.getElementById('notif-target').value = 'all';
+    document.getElementById('notif-channel').checked = true;
+    document.getElementById('channel-push').checked = true;
+    document.getElementById('channel-email').checked = true;
+    document.getElementById('channel-sms').checked = false;
+    document.getElementById('preview-title').textContent = 'Judul Notifikasi';
+    document.getElementById('preview-body').textContent = 'Isi pesan notifikasi akan muncul di sini…';
+    document.getElementById('recipient-number').textContent = '1.847';
+    var errEl = document.getElementById('compose-error');
+    if (errEl) errEl.style.display = 'none';
+  };
+
+  window.sendNotification = async function () {
+    var title = document.getElementById('notif-title').value.trim();
+    var body = document.getElementById('notif-body').value.trim();
+    var target = document.getElementById('notif-target').value;
+    var notifType = document.getElementById('notif-type').value;
+    var errEl = document.getElementById('compose-error');
+
+    // Validation
+    if (!title) {
+      errEl.textContent = 'Judul notifikasi wajib diisi.';
+      errEl.style.display = 'block';
+      document.getElementById('notif-title').focus();
+      return;
+    }
+    if (!body) {
+      errEl.textContent = 'Isi pesan wajib diisi.';
+      errEl.style.display = 'block';
+      document.getElementById('notif-body').focus();
+      return;
+    }
+    if (body.length < 10) {
+      errEl.textContent = 'Isi pesan minimal 10 karakter.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    var pushChecked = document.getElementById('channel-push').checked;
+    var emailChecked = document.getElementById('channel-email').checked;
+    if (!pushChecked && !emailChecked) {
+      errEl.textContent = 'Pilih minimal satu channel (Push atau Email).';
+      errEl.style.display = 'block';
+      return;
+    }
+    errEl.style.display = 'none';
+
+    var btn = document.getElementById('send-notif-btn');
+    setLoading(btn, true);
+
+    try {
+      await API.sendNotification({ title, body, target, type: notifType });
+      Toast.success('Terkirim!', '"' + title + '" berhasil dikirim ke semua merchant.');
+      resetCompose();
+      loadHistory();
+    } catch (err) {
+      Toast.error('Gagal mengirim', err.message);
+    } finally {
+      setLoading(btn, false);
+    }
+  };
+
+  async function loadHistory() {
+    var container = document.getElementById('notif-history');
+    if (!container) return;
+    try {
+      var history = await API.getNotificationHistory();
+      if (history.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></div><div class="empty-state-title">Belum ada notifikasi</div><div class="empty-state-text">Notifikasi yang dikirim akan muncul di sini.</div></div>';
+        return;
+      }
+      var typeColors = { info: 'badge-info', warning: 'badge-trial', promo: 'badge-active', maintenance: 'badge-expired' };
+      var typeLabels = { info: 'Info', warning: 'Peringatan', promo: 'Promo', maintenance: 'Maintenance' };
+      container.innerHTML = history.map(function (n) {
+        var targetLabel = n.target === 'all' ? 'Semua Merchant' : n.target;
+        return '<div style="padding:16px 20px;border-bottom:1px solid var(--color-border-light);transition:background 0.15s;">' +
+          '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px;">' +
+            '<div style="font-weight:700;font-size:0.9375rem;flex:1;">' + n.title + '</div>' +
+            '<span class="badge ' + (typeColors[n.type] || 'badge-info') + '">' + (typeLabels[n.type] || n.type) + '</span>' +
+          '</div>' +
+          '<div style="font-size:0.8125rem;color:var(--color-text-secondary);margin-bottom:6px;">Target: ' + targetLabel + '</div>' +
+          '<div style="display:flex;align-items:center;gap:12px;font-size:0.75rem;color:var(--color-text-muted);">' +
+            '<span>' + Format.datetime(n.sentAt) + '</span>' +
+            '<span>•</span>' +
+            '<span style="color:var(--color-success);font-weight:600;">' + n.recipients.toLocaleString('id-ID') + ' penerima</span>' +
+            '<span>•</span>' +
+            '<span class="badge badge-active">Terkirim</span>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    } catch (err) {
+      container.innerHTML = '<div style="padding:32px;text-align:center;color:var(--color-text-muted);">Gagal memuat riwayat.</div>';
+    }
+  }
+
+  loadHistory();
+})();
+</script>
+</body>
+</html>
