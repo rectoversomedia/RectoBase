@@ -1,0 +1,28 @@
+# RectoBase — Vercel Environment Variables
+# Set these in Vercel Dashboard → Settings → Environment Variables
+
+# ── Database ──────────────────────────────────────────────────────────────────
+DATABASE_URL=postgres://postgres:SabrinaBaby1992!@db.tkouvnftkgnblqexsppk.supabase.co:6543/postgres
+DATABASE_SSL=true
+
+# ── JWT Auth ─────────────────────────────────────────────────────────────────
+JWT_SECRET=rb_jwt_access_secret_32chars_min_abc123
+JWT_REFRESH_SECRET=rb_refresh_secret_different_32chars_xyz789
+
+# ── Tripay Payment Gateway ────────────────────────────────────────────────────
+TRIPAY_API_KEY=YC-LYXMbyJHAZxKrVNacBplaZGAvfHatSGZDG0tla
+TRIPAY_PRIVATE_KEY=EZ0yL-IvhEb-nAhCw-bJYAe-3zRU5
+TRIPAY_MERCHANT_CODE=T50630
+TRIPAY_MODE=sandbox
+
+# ── Ultramsg WhatsApp ─────────────────────────────────────────────────────────
+# ULTRAMSG_INSTANCE_ID=
+# ULTRAMSG_TOKEN=
+# ULTRAMSG_API_URL=https://api.ultramsg.com/
+
+# ── Admin Panel ──────────────────────────────────────────────────────────────
+ADMIN_SECRET=rb_admin_secret_change_this_in_production_xyz
+
+# ── App ──────────────────────────────────────────────────────────────────────
+FRONTEND_URL=https://recto-base.vercel.app
+NODE_ENV=production

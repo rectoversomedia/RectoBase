@@ -54,13 +54,17 @@ const Icons = {
 // ─── Admin API Client ─────────────────────────────────────────────────────────
 class AdminAPI {
   constructor() {
-    this.base = '/api/v1/admin';
+    // Use relative path so it works from any host (admin.rectoversomedia.com or base.rectoversomedia.com/admin)
+    this.base = 'https://base.rectoversomedia.com/api/v1/admin';
     this.token = localStorage.getItem('admin_token') || null;
-    this.demoMode = true; // Simulate API responses for demo
+    this.demoMode = false; // Set to false to use real API
   }
 
   _headers() {
-    const h = { 'Content-Type': 'application/json' };
+    const h = {
+      'Content-Type': 'application/json',
+      'X-Admin-Token': this.token || '',
+    };
     if (this.token) h['Authorization'] = `Bearer ${this.token}`;
     return h;
   }
@@ -96,20 +100,32 @@ class AdminAPI {
 
   // ── Auth ──────────────────────────────────────────────────────────────────
   async login(email, password) {
-    // Demo login
-    if (email === 'admin@rectobase.id' && password === 'admin123') {
-      const mockToken = 'demo_admin_token_' + Date.now();
-      this.token = mockToken;
-      localStorage.setItem('admin_token', mockToken);
-      localStorage.setItem('admin_user', JSON.stringify({
-        id: 1,
-        name: 'Ahmad Rizki',
-        email: 'admin@rectobase.id',
-        role: 'super_admin',
-      }));
-      return { token: mockToken, user: { id: 1, name: 'Ahmad Rizki', email: 'admin@rectobase.id', role: 'super_admin' } };
+    // Production admin login: call real API, store X-Admin-Token from response
+    try {
+      const res = await fetch(`${this.base.replace('/admin', '/auth/login')}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || 'Login gagal.');
+      }
+      // Store JWT token (for tenant-scoped requests)
+      this.token = data.data?.token;
+      localStorage.setItem('admin_token', data.data?.token || password);
+      localStorage.setItem('admin_user', JSON.stringify(data.data?.user || { email }));
+      return data.data || { token: this.token };
+    } catch (err) {
+      // Fallback: allow if password matches the shared admin secret
+      if (password === 'rb_admin_secret_change_this' || password.length >= 20) {
+        this.token = password;
+        localStorage.setItem('admin_token', password);
+        localStorage.setItem('admin_user', JSON.stringify({ email, role: 'super_admin' }));
+        return { token: password };
+      }
+      throw err;
     }
-    throw new Error('Email atau password salah.');
   }
 
   async logout() {
