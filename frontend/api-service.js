@@ -12,7 +12,7 @@
 // ─── Configuration ────────────────────────────────────────────────────────────
 
 const API_CONFIG = {
-  baseURL: window.API_BASE || '',
+  baseURL: window.API_BASE || 'https://base.rectoversomedia.com',
   timeout: 30_000,
   retryAttempts: 1,
   retryDelay: 1_000,
