@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem — RectoBase Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main-content">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">Pengaturan Sistem</h1>
+          <p class="page-subtitle">Monitoring dan konfigurasi infrastruktur</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-sm btn-outline" onclick="runHealthCheck()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            Refresh Status
+          </button>
+        </div>
+      </header>
+
+      <!-- Service Health Grid -->
+      <div class="section">
+        <div class="section-header"><h3 class="section-title">Status Layanan</h3></div>
+        <div class="health-grid" id="healthGrid">
+          <div class="health-card" id="hc-db">
+            <div class="health-card-header">
+              <div class="health-card-icon" id="hc-db-icon">⏳</div>
+              <div>
+                <div class="health-card-name">PostgreSQL Database</div>
+                <div class="health-card-host" id="hc-db-host">Connecting...</div>
+              </div>
+            </div>
+            <div class="health-card-status" id="hc-db-status">Memuat...</div>
+            <div class="health-card-detail" id="hc-db-detail"></div>
+          </div>
+          <div class="health-card" id="hc-api">
+            <div class="health-card-header">
+              <div class="health-card-icon" id="hc-api-icon">⏳</div>
+              <div>
+                <div class="health-card-name">RectoBase API</div>
+                <div class="health-card-host" id="hc-api-host">Loading...</div>
+              </div>
+            </div>
+            <div class="health-card-status" id="hc-api-status">Memuat...</div>
+            <div class="health-card-detail" id="hc-api-detail"></div>
+          </div>
+          <div class="health-card" id="hc-redis">
+            <div class="health-card-header">
+              <div class="health-card-icon" id="hc-redis-icon">⏳</div>
+              <div>
+                <div class="health-card-name">Redis Cache</div>
+                <div class="health-card-host" id="hc-redis-host">Connecting...</div>
+              </div>
+            </div>
+            <div class="health-card-status" id="hc-redis-status">Memuat...</div>
+            <div class="health-card-detail" id="hc-redis-detail"></div>
+          </div>
+          <div class="health-card" id="hc-tripay">
+            <div class="health-card-header">
+              <div class="health-card-icon" id="hc-tripay-icon">⏳</div>
+              <div>
+                <div class="health-card-name">Tripay Gateway</div>
+                <div class="health-card-host" id="hc-tripay-host">api.tripay.co.id</div>
+              </div>
+            </div>
+            <div class="health-card-status" id="hc-tripay-status">Memuat...</div>
+            <div class="health-card-detail" id="hc-tripay-detail"></div>
+          </div>
+          <div class="health-card" id="hc-wa">
+            <div class="health-card-header">
+              <div class="health-card-icon" id="hc-wa-icon">⏳</div>
+              <div>
+                <div class="health-card-name">WhatsApp Gateway</div>
+                <div class="health-card-host" id="hc-wa-host">api.ultramsg.com</div>
+              </div>
+            </div>
+            <div class="health-card-status" id="hc-wa-status">Memuat...</div>
+            <div class="health-card-detail" id="hc-wa-detail"></div>
+          </div>
+          <div class="health-card" id="hc-disk">
+            <div class="health-card-header">
+              <div class="health-card-icon" id="hc-disk-icon">⏳</div>
+              <div>
+                <div class="health-card-name">Disk Space</div>
+                <div class="health-card-host" id="hc-disk-host">Checking...</div>
+              </div>
+            </div>
+            <div class="health-card-status" id="hc-disk-status">Memuat...</div>
+            <div class="health-card-detail" id="hc-disk-detail"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- System Logs -->
+      <div class="section">
+        <div class="section-header">
+          <h3 class="section-title">Log Sistem</h3>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <select id="logLevel" class="filter-select" onchange="loadLogs(1)">
+              <option value="">Semua</option>
+              <option value="error">Error</option>
+              <option value="warn">Warning</option>
+              <option value="info">Info</option>
+            </select>
+            <button class="btn btn-sm btn-outline" onclick="loadLogs(1)">Refresh</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Waktu</th>
+                <th>Level</th>
+                <th>Pesan</th>
+                <th>Meta</th>
+              </tr>
+            </thead>
+            <tbody id="logTableBody">
+              <tr><td colspan="4" class="table-loading">Memuat log...</td></tr>
+            </tbody>
+          </table>
+          <div class="table-footer">
+            <div class="table-info" id="logInfo"></div>
+            <div class="pagination" id="logPagination"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="section">
+        <div class="section-header"><h3 class="section-title">Aksi Cepat</h3></div>
+        <div class="actions-grid">
+          <button class="action-card" onclick="testEmail()">
+            <div class="action-icon">📧</div>
+            <div class="action-label">Test Email</div>
+            <div class="action-desc">Kirim email test via Resend</div>
+          </button>
+          <button class="action-card" onclick="testTripay()">
+            <div class="action-icon">💳</div>
+            <div class="action-label">Test Tripay</div>
+            <div class="action-desc">Verifikasi credentials Tripay</div>
+          </button>
+          <button class="action-card" onclick="clearCache()">
+            <div class="action-icon">🗑️</div>
+            <div class="action-label">Clear Cache</div>
+            <div class="action-desc">Bersihkan Redis cache</div>
+          </button>
+          <button class="action-card" onclick="triggerBackup()">
+            <div class="action-icon">💾</div>
+            <div class="action-label">Backup Now</div>
+            <div class="action-desc">Jalankan backup manual</div>
+          </button>
+          <button class="action-card" onclick="restartAPI()">
+            <div class="action-icon">🔄</div>
+            <div class="action-label">Restart API</div>
+            <div class="action-desc">Restart PM2 process</div>
+          </button>
+          <button class="action-card" onclick="viewEnvConfig()">
+            <div class="action-icon">⚙️</div>
+            <div class="action-label">Env Config</div>
+            <div class="action-desc">Lihat konfigurasi (masked)</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- API Keys Management -->
+      <div class="section">
+        <div class="section-header"><h3 class="section-title">Konfigurasi API</h3></div>
+        <div class="config-grid" id="configGrid">
+          <div class="config-card">
+            <div class="config-label">Tripay API Key</div>
+            <div class="config-value" id="cfg-tripay-key">••••••••••••••••</div>
+            <button class="btn btn-xs btn-outline" onclick="toggleConfig('tripay-key')">Tampilkan</button>
+          </div>
+          <div class="config-card">
+            <div class="config-label">Tripay Merchant Code</div>
+            <div class="config-value" id="cfg-tripay-merchant">••••••••</div>
+            <button class="btn btn-xs btn-outline" onclick="toggleConfig('tripay-merchant')">Tampilkan</button>
+          </div>
+          <div class="config-card">
+            <div class="config-label">Ultramsg Token</div>
+            <div class="config-value" id="cfg-wa-token">••••••••••••••••</div>
+            <button class="btn btn-xs btn-outline" onclick="toggleConfig('wa-token')">Tampilkan</button>
+          </div>
+          <div class="config-card">
+            <div class="config-label">Ultramsg Instance ID</div>
+            <div class="config-value" id="cfg-wa-instance">••••••••</div>
+            <button class="btn btn-xs btn-outline" onclick="toggleConfig('wa-instance')">Tampilkan</button>
+          </div>
+          <div class="config-card">
+            <div class="config-label">Resend API Key</div>
+            <div class="config-value" id="cfg-resend-key">••••••••••••••••</div>
+            <button class="btn btn-xs btn-outline" onclick="toggleConfig('resend-key')">Tampilkan</button>
+          </div>
+          <div class="config-card">
+            <div class="config-label">Frontend URL</div>
+            <div class="config-value" id="cfg-frontend-url">https://recto-base.vercel.app</div>
+            <button class="btn btn-xs btn-outline" onclick="toggleConfig('frontend-url')">Edit</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="assets/js/admin.js"></script>
+  <script>
+    document.getElementById('sidebar').outerHTML = getSidebarHTML('system');
+
+    // ── Auth Guard ──────────────────────────────────────────────────────────────
+    if (!localStorage.getItem('admin_token')) {
+      window.location.href = 'index.html';
+    }
+
+    // ── Health Check ───────────────────────────────────────────────────────────
+    async function runHealthCheck() {
+      const checks = ['db', 'api', 'redis', 'tripay', 'wa', 'disk'];
+      for (const s of checks) {
+        document.getElementById(`hc-${s}-status`).textContent = 'Checking...';
+        document.getElementById(`hc-${s}-icon`).textContent = '⏳';
+      }
+
+      try {
+        const res = await AdminAPI.getHealth();
+        if (res.success && res.data) {
+          const d = res.data;
+          setHealthCard('db', d.db?.ok, `Response: ${d.db?.latency}ms`, d.db?.error || '');
+          setHealthCard('api', true, `Uptime: ${d.api?.uptime || 'N/A'}`, d.api?.version || '');
+          setHealthCard('redis', d.redis?.ok, d.redis?.ok ? 'Connected' : 'Not configured', d.redis?.error || '');
+          setHealthCard('tripay', d.tripay?.configured, d.tripay?.configured ? `${d.tripay.merchant} Mode: ${d.tripay.mode}` : 'Not configured', '');
+          setHealthCard('wa', d.whatsapp?.configured, d.whatsapp?.configured ? `${d.whatsapp.instance} ` : 'Not configured', '');
+          setHealthCard('disk', d.disk?.ok, `${d.disk?.usedPercent?.toFixed(1)}% used`, `${d.disk?.free} free`);
+        }
+      } catch (e) {
+        showToast('Gagal mengambil status sistem: ' + e.message, 'error');
+      }
+    }
+
+    function setHealthCard(id, ok, status, detail) {
+      const icon = document.getElementById(`hc-${id}-icon`);
+      const statusEl = document.getElementById(`hc-${id}-status`);
+      const detailEl = document.getElementById(`hc-${id}-detail`);
+      icon.textContent = ok ? '✅' : '❌';
+      icon.style.fontSize = '24px';
+      statusEl.textContent = status;
+      statusEl.style.color = ok ? 'var(--color-success)' : 'var(--color-danger)';
+      detailEl.textContent = detail;
+    }
+
+    // ── System Logs ────────────────────────────────────────────────────────────
+    let currentLogPage = 1;
+    async function loadLogs(page = 1) {
+      currentLogPage = page;
+      const level = document.getElementById('logLevel')?.value || '';
+      const tbody = document.getElementById('logTableBody');
+      tbody.innerHTML = '<tr><td colspan="4" class="table-loading">Memuat...</td></tr>';
+
+      try {
+        const res = await AdminAPI.getSystemLogs({ page, limit: 50, level });
+        if (res.success && res.data?.logs) {
+          if (res.data.logs.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" class="table-empty">Belum ada log</td></tr>';
+            return;
+          }
+          tbody.innerHTML = res.data.logs.map(log => `
+            <tr>
+              <td class="log-time">${new Date(log.timestamp).toLocaleString('id-ID')}</td>
+              <td><span class="badge badge-${log.level === 'error' ? 'danger' : log.level === 'warn' ? 'warning' : 'info'}">${log.level?.toUpperCase()}</span></td>
+              <td class="log-message">${escapeHtml(log.message)}</td>
+              <td class="log-meta">${log.meta ? escapeHtml(JSON.stringify(log.meta)) : '—'}</td>
+            </tr>
+          `).join('');
+          renderPagination('logPagination', res.data.total, res.data.page, res.data.limit, loadLogs);
+          document.getElementById('logInfo').textContent = `Halaman ${res.data.page} dari ${Math.ceil(res.data.total / res.data.limit)}`;
+        }
+      } catch (e) {
+        tbody.innerHTML = `<tr><td colspan="4" class="table-error">Gagal memuat log: ${escapeHtml(e.message)}</td></tr>`;
+      }
+    }
+
+    // ── Quick Actions ──────────────────────────────────────────────────────────
+    async function testEmail() {
+      try {
+        const res = await AdminAPI.testEmail();
+        showToast(res.success ? 'Email test berhasil dikirim!' : 'Gagal: ' + res.message, res.success ? 'success' : 'error');
+      } catch (e) { showToast('Error: ' + e.message, 'error'); }
+    }
+    async function testTripay() {
+      try {
+        const res = await AdminAPI.testTripay();
+        showToast(res.success ? 'Tripay OK — ' + res.data?.message : 'Tripay belum dikonfigurasi', res.success ? 'success' : 'warning');
+      } catch (e) { showToast('Error: ' + e.message, 'error'); }
+    }
+    async function clearCache() {
+      try {
+        const res = await AdminAPI.clearCache();
+        showToast('Cache cleared', 'success');
+      } catch (e) { showToast('Error: ' + e.message, 'error'); }
+    }
+    async function triggerBackup() {
+      showToast('Backup started... (runs in background)', 'info');
+      try {
+        await AdminAPI.triggerBackup();
+        showToast('Backup triggered successfully', 'success');
+      } catch (e) { showToast('Error: ' + e.message, 'error'); }
+    }
+    async function restartAPI() {
+      if (!confirm('Restart API server? Semua request yang sedang berjalan akan gagal.')) return;
+      try {
+        showToast('Restarting...', 'info');
+        await AdminAPI.restartAPI();
+        setTimeout(runHealthCheck, 5000);
+      } catch (e) { showToast('Error: ' + e.message, 'error'); }
+    }
+    function viewEnvConfig() {
+      showToast('Env config hanya bisa dilihat langsung di server /etc/rectobase/env', 'info');
+    }
+
+    // ── Utility ───────────────────────────────────────────────────────────────
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── Init ──────────────────────────────────────────────────────────────────
+    runHealthCheck();
+    loadLogs(1);
+  </script>
+</body>
+</html>

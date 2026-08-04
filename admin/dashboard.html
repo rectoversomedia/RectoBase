@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Dashboard — RectoBase Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2316a34a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' fill='white' font-size='65' font-weight='800' font-family='sans-serif'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <nav class="admin-sidebar" role="navigation" aria-label="Navigasi utama">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo" aria-hidden="true">R</div>
+      <div class="sidebar-brand-text">
+        <div class="sidebar-brand-name">RectoBase</div>
+        <div class="sidebar-brand-sub">Admin Panel</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Menu Utama</div>
+      <ul class="sidebar-nav" role="list">
+        <li class="sidebar-nav-item"><a href="dashboard.html" class="sidebar-nav-link active" data-page="dashboard.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>Dashboard</a></li>
+        <li class="sidebar-nav-item"><a href="merchants.html" class="sidebar-nav-link" data-page="merchants.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>Merchant</a></li>
+        <li class="sidebar-nav-item"><a href="transactions.html" class="sidebar-nav-link" data-page="transactions.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></span>Transaksi</a></li>
+        <li class="sidebar-nav-item"><a href="promotions.html" class="sidebar-nav-link" data-page="promotions.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>Promosi</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Sistem</div>
+      <ul class="sidebar-nav" role="list">
+        <li class="sidebar-nav-item"><a href="notifications.html" class="sidebar-nav-link" data-page="notifications.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>Notifikasi</a></li>
+        <li class="sidebar-nav-item"><a href="system.html" class="sidebar-nav-link" data-page="system.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span>Sistem</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="sidebar-user">
+        <div class="sidebar-avatar" aria-hidden="true">AR</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name">Ahmad Rizki</div>
+          <div class="sidebar-user-role">Super Admin</div>
+        </div>
+        <button class="sidebar-logout" id="logout-btn" aria-label="Logout" title="Logout">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="admin-content" id="dashboard-page" role="main">
+    <header class="admin-topbar" role="banner">
+      <div class="topbar-left">
+        <h1 class="topbar-title">Dashboard</h1>
+        <nav aria-label="Breadcrumb"><div class="topbar-breadcrumb"><a href="dashboard.html">Home</a> / Dashboard</div></nav>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-btn" aria-label="Notifications">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          <span class="notif-dot" aria-hidden="true"></span>
+        </button>
+        <div class="topbar-user" aria-label="User menu">
+          <div class="topbar-user-avatar" aria-hidden="true">AR</div>
+          <div class="topbar-user-info">
+            <div class="topbar-user-name">Ahmad Rizki</div>
+            <div class="topbar-user-role">Super Admin</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="admin-main">
+      <div class="page-header">
+        <div class="page-header-left">
+          <h2 class="page-title">Ringkasan Platform</h2>
+          <p class="page-subtitle">Update terakhir: <time id="last-updated">Memuat…</time></p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn btn-secondary btn-sm" id="refresh-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+            Refresh
+          </button>
+          <a href="merchants.html" class="btn btn-primary btn-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+            Lihat Merchant
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div id="stats-grid" class="stats-grid" aria-label="Statistik platform">
+        <div class="stat-card"><div class="stat-icon green"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="stat-content"><div class="stat-label">Memuat…</div><div class="stat-value">—</div></div></div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="charts-grid">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Revenue Bulanan</div>
+              <div class="card-subtitle">Monthly Recurring Revenue (MRR), 12 bulan terakhir</div>
+            </div>
+            <span class="badge badge-active">+15.7% YoY</span>
+          </div>
+          <div class="card-body" style="height:280px;">
+            <div class="chart-container" style="height:100%;position:relative;">
+              <canvas id="revenueChart" aria-label="Grafik revenue bulanan" role="img"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Status Sistem</div>
+              <div class="card-subtitle">Kesehatan layanan platform</div>
+            </div>
+            <span class="badge badge-active">Semua Online</span>
+          </div>
+          <div class="card-body">
+            <div id="system-status-grid" class="flex flex-col gap-3" aria-label="Status sistem" style="min-height:200px;">
+              <div class="skeleton skeleton-text" style="height:14px;"></div>
+              <div class="skeleton skeleton-text" style="height:14px;"></div>
+              <div class="skeleton skeleton-text" style="height:14px;"></div>
+              <div class="skeleton skeleton-text" style="height:14px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:0;">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Pertumbuhan Merchant</div>
+              <div class="card-subtitle">Jumlah merchant aktif per bulan</div>
+            </div>
+            <a href="merchants.html" class="card-link">Lihat Detail</a>
+          </div>
+          <div class="card-body" style="height:220px;">
+            <div class="chart-container" style="height:100%;">
+              <canvas id="growthChart" aria-label="Grafik pertumbuhan merchant" role="img"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Registrasi Terbaru</div>
+              <div class="card-subtitle">Merchant yang baru bergabung</div>
+            </div>
+            <a href="merchants.html" class="card-link">Lihat Semua</a>
+          </div>
+          <div class="card-body" style="padding-top:12px;max-height:300px;overflow-y:auto;" id="recent-signups-container">
+            <div id="recent-signups" aria-label="Registrasi terbaru">
+              <div class="skeleton skeleton-text" style="height:14px;"></div>
+              <div class="skeleton skeleton-text" style="height:14px;"></div>
+              <div class="skeleton skeleton-text" style="height:14px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Feed -->
+      <div class="card" style="margin-top:20px;">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Log Aktivitas Sistem</div>
+            <div class="card-subtitle">Aktivitas terbaru di platform</div>
+          </div>
+          <a href="system.html" class="card-link">System Logs</a>
+        </div>
+        <div class="card-body" style="padding-top:12px;max-height:320px;overflow-y:auto;" id="activity-feed-container">
+          <div id="activity-feed" aria-label="Log aktivitas sistem">
+            <div class="skeleton skeleton-text" style="height:14px;"></div>
+            <div class="skeleton skeleton-text" style="height:14px;"></div>
+            <div class="skeleton skeleton-text" style="height:14px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="assets/js/admin.js"></script>
+<script src="assets/js/dashboard.js"></script>
+<script>
+(function () {
+  var el = document.getElementById('last-updated');
+  if (el) el.textContent = new Date().toLocaleString('id-ID', {
+    day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+  });
+  document.getElementById('refresh-btn').addEventListener('click', function () { location.reload(); });
+  initSidebar();
+  requireAuth();
+})();
+</script>
+</body>
+</html>

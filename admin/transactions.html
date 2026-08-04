@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Transaksi — RectoBase Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2316a34a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' fill='white' font-size='65' font-weight='800' font-family='sans-serif'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="admin-layout">
+
+  <nav class="admin-sidebar" role="navigation" aria-label="Navigasi utama">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo" aria-hidden="true">R</div>
+      <div class="sidebar-brand-text">
+        <div class="sidebar-brand-name">RectoBase</div>
+        <div class="sidebar-brand-sub">Admin Panel</div>
+      </div>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Menu Utama</div>
+      <ul class="sidebar-nav" role="list">
+        <li class="sidebar-nav-item"><a href="dashboard.html" class="sidebar-nav-link" data-page="dashboard.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>Dashboard</a></li>
+        <li class="sidebar-nav-item"><a href="merchants.html" class="sidebar-nav-link" data-page="merchants.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>Merchant</a></li>
+        <li class="sidebar-nav-item"><a href="transactions.html" class="sidebar-nav-link active" data-page="transactions.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></span>Transaksi</a></li>
+        <li class="sidebar-nav-item"><a href="promotions.html" class="sidebar-nav-link" data-page="promotions.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>Promosi</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section"><div class="sidebar-section-label">Sistem</div>
+      <ul class="sidebar-nav" role="list">
+        <li class="sidebar-nav-item"><a href="notifications.html" class="sidebar-nav-link" data-page="notifications.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>Notifikasi</a></li>
+        <li class="sidebar-nav-item"><a href="system.html" class="sidebar-nav-link" data-page="system.html"><span class="nav-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span>Sistem</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="sidebar-user">
+        <div class="sidebar-avatar" aria-hidden="true">AR</div>
+        <div class="sidebar-user-info"><div class="sidebar-user-name">Ahmad Rizki</div><div class="sidebar-user-role">Super Admin</div></div>
+        <button class="sidebar-logout" id="logout-btn" aria-label="Logout"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg></button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="admin-content" id="transactions-page" role="main">
+    <header class="admin-topbar" role="banner">
+      <div class="topbar-left">
+        <h1 class="topbar-title">Transaksi</h1>
+        <nav aria-label="Breadcrumb"><div class="topbar-breadcrumb"><a href="dashboard.html">Home</a> / Transaksi</div></nav>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-btn" aria-label="Notifications"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></button>
+        <div class="topbar-user">
+          <div class="topbar-user-avatar" aria-hidden="true">AR</div>
+          <div class="topbar-user-info"><div class="topbar-user-name">Ahmad Rizki</div><div class="topbar-user-role">Super Admin</div></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="admin-main">
+      <div class="page-header">
+        <div class="page-header-left">
+          <h2 class="page-title">Semua Transaksi</h2>
+          <p class="page-subtitle">Payment history seluruh merchant di platform RectoBase</p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn btn-secondary btn-sm" id="export-transactions-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            Export CSV
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar" role="search" aria-label="Filter transaksi">
+        <div class="search-input-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" id="search-input" class="form-input" placeholder="Cari ID, merchant, atau referensi…" aria-label="Cari transaksi">
+        </div>
+        <select id="filter-status" class="form-select" aria-label="Filter status">
+          <option value="">Semua Status</option>
+          <option value="success">Berhasil</option>
+          <option value="pending">Pending</option>
+          <option value="failed">Gagal</option>
+        </select>
+        <input type="date" id="filter-date-from" class="form-input" style="width:auto;" aria-label="Dari tanggal">
+        <input type="date" id="filter-date-to" class="form-input" style="width:auto;" aria-label="Sampai tanggal">
+        <div id="txn-summary" style="margin-left:auto;font-size:0.8125rem;"></div>
+      </div>
+
+      <!-- Table -->
+      <div id="transactions-table-container" aria-label="Daftar transaksi">
+        <div style="display:flex;align-items:center;justify-content:center;min-height:300px;">
+          <div class="spinner" aria-label="Memuat…"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Transaction Detail Modal -->
+<div class="modal-overlay" id="txn-detail-modal" role="dialog" aria-modal="true" aria-labelledby="txn-detail-title">
+  <div class="modal modal-sm">
+    <div class="modal-header">
+      <h3 class="modal-title" id="txn-detail-title">Detail Transaksi</h3>
+      <button class="modal-close" onclick="closeModal('txn-detail-modal')" aria-label="Tutup">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div style="display:grid;gap:14px;">
+        <div style="text-align:center;padding:16px;background:var(--color-bg);border-radius:var(--radius-lg);">
+          <div class="text-sm text-muted mb-2">Jumlah Pembayaran</div>
+          <div id="txn-detail-amount" style="font-size:1.5rem;font-weight:800;color:var(--color-text);">—</div>
+          <div id="txn-detail-status" style="margin-top:8px;">—</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="detail-item"><div class="detail-label">ID Transaksi</div><div id="txn-detail-id" class="detail-value mono" style="font-size:0.8125rem;">—</div></div>
+          <div class="detail-item"><div class="detail-label">Merchant</div><div id="txn-detail-merchant" class="detail-value">—</div></div>
+          <div class="detail-item"><div class="detail-label">Metode</div><div id="txn-detail-method" class="detail-value">—</div></div>
+          <div class="detail-item"><div class="detail-label">Tanggal</div><div id="txn-detail-date" class="detail-value" style="font-size:0.8125rem;">—</div></div>
+          <div class="detail-item"><div class="detail-label">Fee (2.5%)</div><div id="txn-detail-fee" class="detail-value">—</div></div>
+          <div class="detail-item"><div class="detail-label">Net Revenue</div><div id="txn-detail-total" class="detail-value" style="color:var(--color-primary);font-weight:700;">—</div></div>
+          <div class="detail-item" style="grid-column:1/-1;"><div class="detail-label">Reference</div><div id="txn-detail-reference" class="detail-value mono" style="font-size:0.8125rem;">—</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('txn-detail-modal')">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/admin.js"></script>
+<script src="assets/js/transactions.js"></script>
+<script>
+(function () { initSidebar(); requireAuth(); })();
+</script>
+</body>
+</html>

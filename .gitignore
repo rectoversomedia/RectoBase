@@ -4,20 +4,64 @@
 *.env
 secrets.*
 tripay.conf
+tripay*.conf
+*.pem
+*.key
+*.crt
 
 # PHP logs
 api/tripay-callbacks.log
 *.log
+logs/
+
+# Node modules & builds
+node_modules/
+dist/
+build/
+coverage/
+.nyc_output/
+
+# Runtime data
+pids/
+*.pid
+npm-debug.log*
+pm2.log
 
 # macOS
 .DS_Store
 **/.DS_Store
+Thumbs.db
 
 # Editor
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
-# Deploy artifacts
-node_modules/
+# OS
+**/Thumbs.db
+
+# Backup
+*.bak
+*.backup
+*_backup*
+
+# Uploads (user content)
+uploads/
+storage/uploads/
+
+# Temp
+tmp/
+temp/
+.cache/
+
+# Database dumps
+*.sql
+*.dump
+!production/sql/*.sql
+
+# Env files
+.env.local
+.env.development
+.env.production

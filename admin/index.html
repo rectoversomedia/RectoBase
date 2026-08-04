@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="RectoBase Admin Panel - Kelola semua merchant di platform RectoBase">
+  <title>Login — RectoBase Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2316a34a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' fill='white' font-size='65' font-weight='800' font-family='sans-serif'%3ER%3C/text%3E%3C/svg%3E">
+  <style>html,body{height:100%;}body{display:flex;align-items:center;justify-content:center;}</style>
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-card" role="main">
+      <div class="login-logo">
+        <div class="login-logo-icon" aria-hidden="true">R</div>
+        <div>
+          <div class="login-logo-text">RectoBase</div>
+          <div class="login-logo-sub">Admin Panel</div>
+        </div>
+      </div>
+      <h1 class="login-title">Selamat Datang</h1>
+      <p class="login-subtitle">Masuk untuk mengelola platform RectoBase</p>
+
+      <div id="login-error" class="login-error" role="alert" aria-live="assertive" style="display:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+        <span id="error-message">Email atau password salah.</span>
+      </div>
+
+      <form id="login-form" novalidate autocomplete="on">
+        <div class="form-group">
+          <label for="email" class="form-label">Alamat Email</label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="admin@rectobase.id" autocomplete="email" required autofocus>
+          <div class="form-error" id="email-error" style="display:none;" role="alert"></div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="form-label">Kata Sandi</label>
+          <div style="position:relative;">
+            <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" autocomplete="current-password" required style="padding-right:44px;">
+            <button type="button" id="toggle-password" aria-label="Tampilkan sandi" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--color-text-muted);display:flex;align-items:center;">
+              <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <div class="form-error" id="password-error" style="display:none;" role="alert"></div>
+        </div>
+        <div class="flex justify-between items-center mb-4">
+          <label class="form-check">
+            <input type="checkbox" name="remember">
+            <span class="text-sm" style="color:var(--color-text-secondary);">Ingat saya</span>
+          </label>
+          <a href="#" class="text-sm" style="color:var(--color-primary);">Lupa sandi?</a>
+        </div>
+        <button type="submit" id="login-btn" class="btn btn-primary btn-lg w-full">Masuk</button>
+      </form>
+
+      <div class="login-divider">Demo Credentials</div>
+      <div style="background:var(--color-bg);border-radius:var(--radius);padding:14px 16px;font-size:0.8125rem;color:var(--color-text-secondary);line-height:1.8;">
+        <div><strong>Email:</strong> <code style="background:#e2e8f0;padding:1px 6px;border-radius:4px;font-size:0.75rem;">admin@rectobase.id</code></div>
+        <div><strong>Password:</strong> <code style="background:#e2e8f0;padding:1px 6px;border-radius:4px;font-size:0.75rem;">admin123</code></div>
+      </div>
+
+      <div class="login-footer">
+        <a href="../">Kembali ke RectoBase</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/admin.js"></script>
+  <script>
+  (function () {
+    if (localStorage.getItem('admin_token')) {
+      window.location.href = 'dashboard.html';
+      return;
+    }
+
+    const form = document.getElementById('login-form');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const loginBtn = document.getElementById('login-btn');
+    const errorAlert = document.getElementById('login-error');
+    const errorMessage = document.getElementById('error-message');
+    const emailError = document.getElementById('email-error');
+    const passwordError = document.getElementById('password-error');
+    const togglePassword = document.getElementById('toggle-password');
+
+    togglePassword.addEventListener('click', function () {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      togglePassword.setAttribute('aria-label', isPassword ? 'Sembunyikan sandi' : 'Tampilkan sandi');
+    });
+
+    function clearErrors() {
+      errorAlert.style.display = 'none';
+      emailError.style.display = 'none';
+      passwordError.style.display = 'none';
+      emailInput.classList.remove('error');
+      passwordInput.classList.remove('error');
+    }
+
+    emailInput.addEventListener('input', clearErrors);
+    passwordInput.addEventListener('input', clearErrors);
+
+    function validate() {
+      var valid = true;
+      var email = emailInput.value.trim();
+      if (!email) {
+        emailError.textContent = 'Email wajib diisi.';
+        emailError.style.display = 'block';
+        emailInput.classList.add('error');
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailError.textContent = 'Masukkan alamat email yang valid.';
+        emailError.style.display = 'block';
+        emailInput.classList.add('error');
+        valid = false;
+      }
+      if (!passwordInput.value) {
+        passwordError.textContent = 'Kata sandi wajib diisi.';
+        passwordError.style.display = 'block';
+        passwordInput.classList.add('error');
+        valid = false;
+      }
+      return valid;
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      clearErrors();
+      if (!validate()) return;
+
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<span class="spinner-sm" style="border-color:rgba(255,255,255,0.4);border-top-color:white;"></span> Memasuki…';
+
+      try {
+        await AdminAPI.login(emailInput.value.trim(), passwordInput.value);
+        loginBtn.innerHTML = '<span class="spinner-sm" style="border-color:rgba(255,255,255,0.4);border-top-color:white;"></span> Berhasil!';
+        loginBtn.style.background = 'var(--color-success)';
+        setTimeout(function () { window.location.href = 'dashboard.html'; }, 600);
+      } catch (err) {
+        errorMessage.textContent = err.message || 'Email atau password salah.';
+        errorAlert.style.display = 'flex';
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Masuk';
+        passwordInput.value = '';
+        passwordInput.focus();
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
