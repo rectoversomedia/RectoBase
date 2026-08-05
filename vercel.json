@@ -1,6 +1,6 @@
 {
-  "buildCommand": "echo 'no build step'",
-  "installCommand": "npm install",
+  "buildCommand": "echo 'skipping build'",
+  "installCommand": "npm install --ignore-scripts",
   "devCommand": "node api/index.js",
   "regions": ["sin1"],
   "functions": {
